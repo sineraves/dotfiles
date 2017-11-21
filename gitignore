@@ -1,0 +1,10 @@
+*.pyc
+*.swo
+*.swp
+.DS_Store
+.envrc
+.rbenv-version
+.vagrant
+/.tags
+/.tags_sorted_by_file
+tags

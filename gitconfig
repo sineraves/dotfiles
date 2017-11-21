@@ -1,0 +1,47 @@
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = auto
+
+[core]
+  excludesfile = ~/.gitignore
+
+[push]
+  default = current
+
+[apply]
+  whitespace = nowarn
+
+[branch]
+  autosetupmerge = true
+
+[mergetool]
+  keepBackup = false
+  prompt = false
+
+[mergetool "Kaleidoscope"]
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustexitcode = true
+
+[merge]
+  tool = Kaleidoscope
+
+[difftool "Kaleidoscope"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
+[difftool]
+  prompt = false
+
+[diff]
+  tool = Kaleidoscope
+
+[include]
+  path = .gitconfig.user
+
+[filter "lfs"]
+  required = true
+  process = git-lfs filter-process
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f

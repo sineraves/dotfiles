@@ -1,0 +1,6 @@
+[submodule "vendor/zsh-autoenv"]
+	path = vendor/zsh-autoenv
+	url = https://github.com/Tarrasch/zsh-autoenv
+[submodule "vendor/zsh-history-substring-search"]
+	path = vendor/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search
