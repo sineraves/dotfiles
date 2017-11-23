@@ -1,6 +1,3 @@
-set nocompatible
-
-
 " Load plugins """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let s:plugins = $HOME . '/.dotfiles/vim/plugins.vim'
@@ -15,7 +12,6 @@ set hidden
 set showcmd
 set splitbelow
 set splitright
-set suffixesadd=.ex,.rb
 
 
 " Presentation """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -25,7 +21,7 @@ if has('termguicolors')
 endif
 
 set background=dark
-set colorcolumn=81
+set colorcolumn=+1
 set cursorline
 set formatoptions+=tcqjn
 set laststatus=2
@@ -36,6 +32,7 @@ set number
 set numberwidth=5
 set relativenumber
 set synmaxcol=800
+set textwidth=80
 
 let g:airline_theme = 'base16_tomorrow'
 let g:tmuxline_powerline_separators = 0
@@ -62,8 +59,8 @@ set expandtab
 set preserveindent
 set shiftround
 set shiftwidth=2
+set softtabstop=-1
 set smarttab
-set tabstop=2
 
 
 " Completion """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
