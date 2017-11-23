@@ -26,16 +26,9 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'pbrisbin/vim-mkdir'
 
 " Language / Syntax
-Plug 'ElmCast/elm-vim'
-Plug 'elixir-lang/vim-elixir'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/es.next.syntax.vim'
-Plug 'othree/html5.vim'
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'sheerun/vim-polyglot'
 Plug 'slashmili/alchemist.vim'
 Plug 'tpope/vim-rails'
-Plug 'vim-ruby/vim-ruby'
 
 " Presentation
 Plug 'chriskempson/base16-vim'
