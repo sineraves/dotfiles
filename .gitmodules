@@ -4,3 +4,6 @@
 [submodule "vendor/zsh-history-substring-search"]
 	path = vendor/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search
+[submodule "vendor/zsh-autosuggestions"]
+	path = vendor/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions

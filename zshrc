@@ -13,6 +13,7 @@ if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
 source ~/.dotfiles/vendor/zsh-history-substring-search/zsh-history-substring-search.zsh
 source ~/.dotfiles/vendor/zsh-autoenv/autoenv.zsh
+source ~/.dotfiles/vendor/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # kiex - elixir version management
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
