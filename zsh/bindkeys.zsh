@@ -7,6 +7,8 @@ bindkey "^F"      forward-char                         # ctrl-f
 bindkey "^B"      backward-char                        # ctrl-b
 
 bindkey -e   # Default to standard emacs bindings, regardless of editor string
+bindkey '[C' forward-word
+bindkey '[D' backward-word
 
 bindkey '^[[A'    history-substring-search-up          # up arrow
 bindkey '^[[B'    history-substring-search-down        # down arrow
