@@ -204,6 +204,9 @@ set nowritebackup
 " Testing & Linting """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let test#strategy = 'dispatch'
+let g:ale_completion_delay = 200
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_linters = {'ruby': ['reek', 'rubocop']}
 
