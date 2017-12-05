@@ -1,4 +1,4 @@
-export PATH=/usr/local/opt/python/libexec/bin:/usr/local/sbin:/usr/local/bin:~/.local/bin:$PATH
+export PATH=/usr/local/opt/postgresql@9.6/bin:/usr/local/opt/python/libexec/bin:/usr/local/sbin:/usr/local/bin:~/.local/bin:$PATH
 # Setup terminal, and turn on colors
 export TERM=xterm-256color
 export CLICOLOR=1
@@ -23,7 +23,6 @@ export LC_COLLATE=C
 # git ignored files I consider interesting.
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/" --glob "!_build/" --glob "!deps/" --glob "!node_modules/" --glob "!vendor/bundle/"'
 
-export JAVA_HOME='/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/'
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 
 export NVM_DIR="$HOME/.nvm"
