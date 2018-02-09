@@ -16,11 +16,7 @@ set splitright
 
 " Presentation """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-if has('termguicolors')
-  set termguicolors
-endif
-
-set background=dark
+set background=light
 set colorcolumn=+1
 set cursorline
 set formatoptions+=tcqjn
@@ -34,10 +30,11 @@ set relativenumber
 set synmaxcol=800
 set textwidth=80
 
-let g:airline_theme = 'base16_tomorrow'
+colorscheme solarized
+
+let g:airline_theme = 'solarized'
 let g:tmuxline_powerline_separators = 0
 
-colorscheme base16-tomorrow-night
 highlight link xmlEndTag xmlTag
 
 augroup presentation

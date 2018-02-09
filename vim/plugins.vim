@@ -31,10 +31,11 @@ Plug 'slashmili/alchemist.vim'
 Plug 'tpope/vim-rails'
 
 " Presentation
+Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 " Re-enable when there's a need to regenerate a tmux theme
-" Plug 'edkolev/tmuxline.vim'
+Plug 'edkolev/tmuxline.vim'
 
 " System
 Plug 'ludovicchabant/vim-gutentags'
