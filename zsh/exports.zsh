@@ -23,6 +23,5 @@ export LC_COLLATE=C
 # git ignored files I consider interesting.
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/" --glob "!_build/" --glob "!deps/" --glob "!node_modules/" --glob "!vendor/bundle/"'
 
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 
 export NVM_DIR="$HOME/.nvm"
