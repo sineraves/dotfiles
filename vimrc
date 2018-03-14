@@ -16,7 +16,7 @@ set splitright
 
 " Presentation """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set background=light
+let background=$ITERM_PROFILE
 set colorcolumn=+1
 set cursorline
 set formatoptions+=tcqjn
