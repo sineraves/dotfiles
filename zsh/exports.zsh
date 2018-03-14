@@ -23,5 +23,7 @@ export LC_COLLATE=C
 # git ignored files I consider interesting.
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/" --glob "!_build/" --glob "!deps/" --glob "!node_modules/" --glob "!vendor/bundle/"'
 
+# Get history in elixir shells
+export ERL_AFLAGS='-kernel shell_history enabled'
 
 export NVM_DIR="$HOME/.nvm"
