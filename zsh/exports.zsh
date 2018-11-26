@@ -25,5 +25,3 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 
 # Get history in elixir shells
 export ERL_AFLAGS='-kernel shell_history enabled'
-
-export NVM_DIR="$HOME/.nvm"

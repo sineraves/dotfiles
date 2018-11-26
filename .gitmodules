@@ -7,3 +7,9 @@
 [submodule "vendor/zsh-autosuggestions"]
 	path = vendor/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "vendor/zsh-nvm"]
+	path = vendor/zsh-nvm
+	url = https://github.com/lukechilds/zsh-nvm.git
+[submodule "vendor/zsh-better-npm-completion"]
+	path = vendor/zsh-better-npm-completion
+	url = https://github.com/lukechilds/zsh-better-npm-completion.git

@@ -9,18 +9,15 @@ source ~/.zsh/functions.zsh
 source ~/.zsh/history.zsh
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 
+source ~/.dotfiles/vendor/zsh-nvm/zsh-nvm.plugin.zsh
+source ~/.dotfiles/vendor/zsh-better-npm-completion/zsh-better-npm-completion.plugin.zsh
 source ~/.dotfiles/vendor/zsh-history-substring-search/zsh-history-substring-search.zsh
 source ~/.dotfiles/vendor/zsh-autoenv/autoenv.zsh
 source ~/.dotfiles/vendor/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # kiex - elixir version management
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-
-# NVM
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
