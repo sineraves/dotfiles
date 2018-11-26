@@ -65,7 +65,7 @@ set smarttab
 set complete-=t
 
 let g:gutentags_ctags_executable = '/usr/local/bin/ctags'
-let g:gutentags_ctags_exclude = ['node_modules/**', 'vendor/**']
+let g:gutentags_ctags_exclude = ['node_modules/**', 'vendor/**', '.elixir_ls/**']
 
 " configure neocomplete
 let g:acp_enableAtStartup = 0

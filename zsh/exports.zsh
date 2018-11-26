@@ -23,7 +23,7 @@ export LC_COLLATE=C
 # Configure FZF to use rimgrep
 # Using globs while setting `--no-ignore` so I can still find some
 # git ignored files I consider interesting.
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/" --glob "!_build/" --glob "!deps/" --glob "!node_modules/" --glob "!vendor/bundle/"'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.elixir_ls/" --glob "!.git/" --glob "!_build/" --glob "!deps/" --glob "!node_modules/" --glob "!vendor/bundle/"'
 
 # Get history in elixir shells
 export ERL_AFLAGS='-kernel shell_history enabled'
