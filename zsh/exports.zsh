@@ -1,4 +1,6 @@
-export PATH=/usr/local/opt/postgresql@9.6/bin:/usr/local/opt/python/libexec/bin:/usr/local/sbin:/usr/local/bin:~/.local/bin:$PATH
+export PATH=$HOME/Library/Haskell/bin:/usr/local/opt/python/libexec/bin:/usr/local/sbin:/usr/local/bin:~/.local/bin:$PATH
+export PATH=/usr/local/opt/qt@5.5/bin:$PATH
+
 # Setup terminal, and turn on colors
 export TERM=xterm-256color
 export CLICOLOR=1
