@@ -53,6 +53,8 @@ set cursorline
 set formatoptions+=tcqjn
 " always show status line
 set laststatus=2
+" don't put mode message on last line
+set noshowmode
 " show some invisible characters
 set list listchars=tab:»·,trail:·,nbsp:·
 " keep cursor in same column when moving over lines
@@ -165,15 +167,26 @@ let g:ale_elixir_elixir_ls_release = '~/Developer/Tools/elixir-ls/rel'
 
 " deoplete.vim
 call deoplete#custom#option('sources', {
-      \ '_': ['omni', 'buffer'],
-      \ 'elixir': ['omni', 'buffer']
+      \ '_': ['neosnippet', 'buffer'],
+      \ 'elixir': ['omni', 'neosnippet', 'buffer']
       \ })
 call deoplete#custom#source('omni', 'functions', {
       \ 'elixir': 'lsp#complete'
       \ })
 call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'elixir': ['\w+', '[^. *\t]\.\w*']
+      \ 'elixir': ['\w+', '[^. *\t]\.\w*'],
+      \ 'ruby': ['\w+', '[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
+      \ 'javascript': ['\w+', '[^. *\t]\.\w*'],
+      \ 'typescript': ['\w+', '[^. *\t]\.\w*']
       \ })
+call deoplete#custom#source('_', 'converters', [
+      \ 'converter_remove_paren',
+      \ 'converter_auto_delimiter',
+      \ 'converter_remove_overlap',
+      \ 'converter_truncate_abbr',
+      \ 'converter_truncate_menu',
+      \ ])
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy', 'matcher_length'])
 let g:deoplete#enable_at_startup = 1
 
 " echodoc.vim
@@ -188,6 +201,8 @@ let g:user_emmet_settings = {
 
 " neosnippet
 let g:neosnippet#disable_runtime_snippets = { '_' : 1 }
+let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
 
 " tmuxline.vim
 let g:tmuxline_powerline_separators = 0
@@ -290,6 +305,20 @@ nmap <silent> <leader>T :w<CR>:TestFile<CR>
 nmap <silent> <leader>a :w<CR>:TestSuite<CR>
 nmap <silent> <leader>l :w<CR>:TestLast<CR>
 nmap <silent> <leader>g :w<CR>:TestVisit<CR>
+
+" neosnippet selection and expansion via deoplete
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <expr><TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ neosnippet#expandable_or_jumpable() ?
+      \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 
 " ==============================================================================

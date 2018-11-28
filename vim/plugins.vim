@@ -22,6 +22,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
 " Completion and Reference
+Plug 'honza/vim-snippets'
 Plug 'Shougo/echodoc.vim'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
