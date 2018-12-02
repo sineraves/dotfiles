@@ -4,7 +4,7 @@ alias la='ls -GFhla'
 
 alias mux=tmuxinator
 
-alias startpost='pg_ctl -D pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias stoppost='pg_ctl -D /usr/local/var/postgres stop'
 
 alias gd='git diff'
