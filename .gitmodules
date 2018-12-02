@@ -13,3 +13,6 @@
 [submodule "vendor/zsh-better-npm-completion"]
 	path = vendor/zsh-better-npm-completion
 	url = https://github.com/lukechilds/zsh-better-npm-completion.git
+[submodule "vendor/zsh-completions"]
+	path = vendor/zsh-completions
+	url = git://github.com/zsh-users/zsh-completions.git

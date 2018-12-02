@@ -1,3 +1,4 @@
+export FPATH=$HOME/.dotfiles/vendor/zsh-completions/src:$FPATH
 export PATH=$HOME/Library/Haskell/bin:/usr/local/opt/python/libexec/bin:/usr/local/sbin:/usr/local/bin:~/.local/bin:$PATH
 export PATH=/usr/local/opt/qt@5.5/bin:$PATH
 
