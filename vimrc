@@ -9,7 +9,7 @@ source $HOME/.dotfiles/vim/plugins.vim
 " ==============================================================================
 
 " a mighty good leader
-let mapleader = ','
+let mapleader = "\<Space>"
 " automatically refresh externally changed files
 set autoread
 " hide abandoned buffers (allows for leaving them unsaved)
@@ -30,13 +30,9 @@ set noswapfile
 " Interface
 " ==============================================================================
 
-" infer background from named iterm profile (light or dark)
-" in vim I was using `set background=$ITERM_PROFILE`, but I haven’t got this
-" working in neovim
-if $ITERM_PROFILE == 'light'
-      set background=light
-else
-      set background=dark
+" infer background from named iterm profile
+if $ITERM_PROFILE == 'light' || $ITERM_PROFILE == 'dark'
+  exec 'set background=' . $ITERM_PROFILE
 endif
 
 " set colorscheme
@@ -67,15 +63,19 @@ set number
 set relativenumber
 " nice padding for line numbers
 set numberwidth=5
+" when visiting buffers, switch to any open windows that contain them
+set switchbuf=useopen
 " see `:help wildmode` for a description of these
 set wildmode=list:longest,full
 " standard ignore patterns for expanding wildcards
 set wildignore=*.o,*~,*/.git,*/tmp/*,*/node_modules/*,*/_build/*,*/deps/*,*/target/*
 " use popup menu for Insert mode completion, even when only one match
 " don't automatically select a match in the menu
-set completeopt=menu,menuone,noselect
-" fix end tag highlighting in html etc
-highlight link xmlEndTag xmlTag
+set completeopt+=menuone
+set completeopt+=noinsert
+set completeopt+=noselect
+set completeopt-=preview
+set shortmess+=c
 
 
 " ==============================================================================
@@ -104,6 +104,8 @@ set nojoinspaces
 runtime macros/matchit.vim
 " indent p and li tags
 let g:html_indent_tags = ['p', 'li']
+" fix end tag highlighting in html etc
+highlight link xmlEndTag xmlTag
 
 " strip trailing whitespace, maintaining last search and cursor position.
 function! <SID>StripTrailingWhitespace()
@@ -115,6 +117,13 @@ function! <SID>StripTrailingWhitespace()
 
       let @/=_s
       call cursor(l, c)
+endfunction
+
+function! s:smart_cr()
+  return neosnippet#expandable_or_jumpable() ?
+        \ neosnippet#mappings#expand_or_jump_impl()
+        \ : pumvisible() ? deoplete#mappings#close_popup()
+        \ : "\<CR>" . EndwiseDiscretionary()
 endfunction
 
 augroup editing
@@ -154,43 +163,52 @@ set wrapscan
 " ==============================================================================
 
 " ale
-let g:ale_completion_enabled = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_linters = {'elixir': ['credo'], 'ruby': ['reek', 'rubocop']}
-let g:ale_fixers = {'javascript': ['prettier']}
+let g:ale_linters = {
+      \ 'elixir': ['credo', 'elixir-ls'],
+      \ 'ruby': ['reek', 'rubocop']
+      \}
+let g:ale_fixers = {
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'elixir': ['mix_format'],
+      \ 'javascript': ['prettier']
+      \}
 let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_elixir_elixir_ls_release = '~/Developer/Tools/elixir-ls/rel'
+let g:ale_elixir_elixir_ls_release = $HOME . '/Developer/Tools/elixir-ls/rel'
+let g:ale_elixir_elixir_ls_config = {
+      \ 'elixirLS': {
+      \   'dialyzerEnabled': v:false,
+      \ }
+      \}
 
-" deoplete.vim
-call deoplete#custom#option('sources', {
-      \ '_': ['neosnippet', 'buffer'],
-      \ 'elixir': ['omni', 'neosnippet', 'buffer']
-      \ })
-call deoplete#custom#source('omni', 'functions', {
-      \ 'elixir': 'lsp#complete'
-      \ })
-call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'elixir': ['\w+', '[^. *\t]\.\w*'],
-      \ 'ruby': ['\w+', '[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
-      \ 'javascript': ['\w+', '[^. *\t]\.\w*'],
-      \ 'typescript': ['\w+', '[^. *\t]\.\w*']
-      \ })
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#source('elixir', 'min_pattern_length', 1)
+call deoplete#custom#option('ignore_sources', {
+      \ '_': ['tag'],
+      \ 'elixir': ['tag', 'omni']
+      \})
 call deoplete#custom#source('_', 'converters', [
       \ 'converter_remove_paren',
       \ 'converter_auto_delimiter',
       \ 'converter_remove_overlap',
       \ 'converter_truncate_abbr',
       \ 'converter_truncate_menu',
-      \ ])
-call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy', 'matcher_length'])
-let g:deoplete#enable_at_startup = 1
+      \])
 
 " echodoc.vim
 let g:echodoc_enable_at_startup = 1
+
+" endwise - don't mess with mappings I’ve defined
+let g:endwise_no_mappings = 1
+
+" neosnippet
+let g:neosnippet#disable_runtime_snippets = { '_' : 1 }
+let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#snippets_directory= $HOME . '/.vim/plugged/vim-snippets/snippets'
 
 " emmet-vim
 let g:user_emmet_settings = {
@@ -199,20 +217,16 @@ let g:user_emmet_settings = {
       \  },
       \}
 
-" neosnippet
-let g:neosnippet#disable_runtime_snippets = { '_' : 1 }
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
-
 " tmuxline.vim
 let g:tmuxline_powerline_separators = 0
 
 " vim-airline
 let g:airline_theme = 'solarized'
+let g:airline#extensions#ale#enabled = 1
 
 " vim-fzf
 command! -bang -nargs=* Rg
-      \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --hidden --glob "!.git/" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+      \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --hidden --global "!_build/" --glob "!deps/" --glob "!.git/" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " vim-gutentags
 let g:gutentags_ctags_exclude = [
@@ -223,22 +237,8 @@ let g:gutentags_ctags_exclude = [
       \ '_build'
       \]
 
-" vim-lsp
-augroup lsp
-  au!
-
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'elixir-ls',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, '~/Developer/Tools/elixir-ls/rel/language_server.sh']},
-        \ 'whitelist': ['elixir', 'eelixir'],
-        \ })
-augroup END
-
 " vim-peekaboo
 let g:peekaboo_window = 'vertical botright 60new'
-
-" vim-polyglot
-let g:jsx_ext_required = 0
 
 " vim-test
 let test#strategy = 'dispatch'
@@ -270,7 +270,10 @@ map <leader>= :EasyAlign =<cr>
 map <leader>; :EasyAlign :<cr>
 
 " quickly clear search highlights
-nnoremap <leader><leader> :noh<cr>
+nnoremap <leader>c :noh<cr>
+
+" quickly toggle goyo (focussed writing view)
+nmap <leader><leader> :Goyo<cr>
 
 " project search using custom Rg command and vim-fzf
 nnoremap \ :Rg<space>
@@ -311,14 +314,16 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+" <Tab> behaviour
 imap <expr><TAB>
       \ pumvisible() ? "\<C-n>" :
       \ neosnippet#expandable_or_jumpable() ?
       \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
       \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" <CR> behaviour
+inoremap <expr> <CR> <SID>smart_cr()
 
 
 " ==============================================================================

@@ -3,6 +3,7 @@ call plug#begin(s:plugged_dir)
 
 " Language / Syntax
 Plug 'sheerun/vim-polyglot'
+Plug 'slashmili/alchemist.vim'
 Plug 'tpope/vim-rails'
 
 " Editing
@@ -14,7 +15,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
 Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'mattn/emmet-vim'
-Plug 'prabirshrestha/async.vim' | Plug 'prabirshrestha/vim-lsp'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
@@ -22,8 +22,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
 " Completion and Reference
-Plug 'honza/vim-snippets'
-Plug 'Shougo/echodoc.vim'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -31,7 +29,9 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-Plug 'Shougo/neosnippet'
+Plug 'honza/vim-snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/echodoc.vim'
 
 " Interface
 Plug 'altercation/vim-colors-solarized'
