@@ -34,8 +34,7 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/echodoc.vim'
 
 " Interface
-Plug 'altercation/vim-colors-solarized'
-Plug 'chriskempson/base16-vim'
+Plug 'lifepillar/vim-solarized8'
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 " Re-enable when there's a need to regenerate a tmux theme
 " Plug 'edkolev/tmuxline.vim'
