@@ -3,7 +3,7 @@ export PATH=$HOME/Library/Haskell/bin:/usr/local/opt/python/libexec/bin:/usr/loc
 export PATH=/usr/local/opt/qt@5.5/bin:$PATH
 
 # Setup terminal, and turn on colors
-export TERM=xterm-256color
+export TERM=screen-256color
 export CLICOLOR=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
@@ -17,7 +17,7 @@ export ARCHFLAGS='-arch x86_64'
 
 export LESS='--ignore-case --raw-control-chars'
 export PAGER='less'
-export EDITOR='vim'
+export EDITOR='nvim'
 # CTAGS Sorting in VIM/Emacs is better behaved with this in place
 export LC_COLLATE=C
 

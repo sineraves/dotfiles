@@ -30,13 +30,19 @@ set noswapfile
 " Interface
 " ==============================================================================
 
+" true colour
+if has('termguicolors')
+  set termguicolors
+endif
+
 " infer background from named iterm profile
 if $ITERM_PROFILE == 'light' || $ITERM_PROFILE == 'dark'
   exec 'set background=' . $ITERM_PROFILE
 endif
 
-" set colorscheme
-colorscheme solarized
+" still the only theme I like and that can match iterm2 nicely
+colorscheme solarized8
+
 " don't try and highlight crazy long lines
 set synmaxcol=800
 " where to highlight column and wrap text (when enabled)
@@ -169,12 +175,14 @@ let g:ale_lint_on_save = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_linters = {
       \ 'elixir': ['credo', 'elixir-ls'],
+      \ 'python': ['flake8'],
       \ 'ruby': ['reek', 'rubocop']
       \}
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'elixir': ['mix_format'],
-      \ 'javascript': ['prettier']
+      \ 'javascript': ['prettier'],
+      \ 'python': ['black']
       \}
 let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
@@ -189,7 +197,8 @@ let g:deoplete#enable_at_startup = 1
 call deoplete#custom#source('elixir', 'min_pattern_length', 1)
 call deoplete#custom#option('ignore_sources', {
       \ '_': ['tag'],
-      \ 'elixir': ['tag', 'omni']
+      \ 'elixir': ['tag', 'omni'],
+      \ 'python': ['tag', 'omni']
       \})
 call deoplete#custom#source('_', 'converters', [
       \ 'converter_remove_paren',
