@@ -5,6 +5,7 @@ call plug#begin(s:plugged_dir)
 Plug 'sheerun/vim-polyglot'
 Plug 'slashmili/alchemist.vim'
 Plug 'tpope/vim-rails'
+Plug 'tweekmonster/django-plus.vim'
 
 " Editing
 Plug 'AndrewRadev/splitjoin.vim'
@@ -32,6 +33,7 @@ endif
 Plug 'honza/vim-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/echodoc.vim'
+Plug 'zchee/deoplete-jedi'
 
 " Interface
 Plug 'lifepillar/vim-solarized8'
