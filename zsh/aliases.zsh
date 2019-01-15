@@ -1,3 +1,5 @@
+alias el='exa -l'
+alias ea='exa -la'
 alias ls='ls -GFh'
 alias ll='ls -GFhl'
 alias la='ls -GFhla'
