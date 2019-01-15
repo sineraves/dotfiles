@@ -127,7 +127,7 @@ endfunction
 
 function! s:smart_cr()
   return neosnippet#expandable_or_jumpable() ?
-        \ neosnippet#mappings#expand_or_jump_impl()
+        \ "\<Plug>(neosnippet_expand_or_jump)"
         \ : pumvisible() ? deoplete#mappings#close_popup()
         \ : "\<CR>" . EndwiseDiscretionary()
 endfunction
@@ -331,8 +331,7 @@ imap <expr><TAB>
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
       \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-" <CR> behaviour
-inoremap <expr> <CR> <SID>smart_cr()
+imap <expr><CR> <SID>smart_cr()
 
 
 " ==============================================================================
