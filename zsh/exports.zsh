@@ -7,6 +7,12 @@ export TERM=screen-256color
 export CLICOLOR=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
+if [ "$ITERM_PROFILE" = 'dark' ]; then
+  export BAT_THEME='Monokai Extended'
+elif [ "$ITERM_PROFILE" = 'light' ]; then
+  export BAT_THEME='Monokai Extended Light'
+fi
+
 # Enable color in grep
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='3;33'
