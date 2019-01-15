@@ -19,5 +19,7 @@ source ~/.dotfiles/vendor/zsh-autosuggestions/zsh-autosuggestions.zsh
 # kiex - elixir version management
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 
+test -s /usr/local/etc/profile.d/z.sh && source /usr/local/etc/profile.d/z.sh
+
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
