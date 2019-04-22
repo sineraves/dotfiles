@@ -16,3 +16,6 @@
 [submodule "vendor/zsh-completions"]
 	path = vendor/zsh-completions
 	url = git://github.com/zsh-users/zsh-completions.git
+[submodule "vendor/dracula"]
+	path = vendor/dracula
+	url = https://github.com/dracula/iterm.git
