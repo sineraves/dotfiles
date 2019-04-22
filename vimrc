@@ -300,12 +300,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" no arrow keys in normal mode
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-
 " fuzzy-find files and buffers with fzf
 nnoremap <leader>f :Files<cr>
 nnoremap <leader>gf :GFiles<cr>
