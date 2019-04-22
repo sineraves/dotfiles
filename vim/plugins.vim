@@ -37,6 +37,7 @@ Plug 'zchee/deoplete-jedi'
 
 " Interface
 Plug 'lifepillar/vim-solarized8'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 " Re-enable when there's a need to regenerate a tmux theme
 " Plug 'edkolev/tmuxline.vim'

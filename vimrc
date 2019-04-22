@@ -40,8 +40,7 @@ if $ITERM_PROFILE == 'light' || $ITERM_PROFILE == 'dark'
   exec 'set background=' . $ITERM_PROFILE
 endif
 
-" still the only theme I like and that can match iterm2 nicely
-colorscheme solarized8
+colorscheme dracula
 
 " don't try and highlight crazy long lines
 set synmaxcol=800
@@ -230,7 +229,7 @@ let g:user_emmet_settings = {
 let g:tmuxline_powerline_separators = 0
 
 " vim-airline
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'dracula'
 let g:airline#extensions#ale#enabled = 1
 
 " vim-fzf
