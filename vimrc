@@ -175,14 +175,17 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_linters = {
       \ 'elixir': ['credo', 'elixir-ls'],
       \ 'python': ['flake8'],
-      \ 'ruby': ['reek', 'rubocop']
+      \ 'ruby': ['reek', 'rubocop'],
+      \ 'css': ['stylelint'],
+      \ 'scss': ['stylelint']
       \}
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'elixir': ['mix_format'],
       \ 'javascript': ['prettier'],
       \ 'python': ['black'],
-      \ 'scss': ['prettier']
+      \ 'css': ['stylelint'],
+      \ 'scss': ['stylelint']
       \}
 let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
