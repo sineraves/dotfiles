@@ -1,8 +1,12 @@
 alias e='exa -l'
 alias ea='exa -la'
-alias ls='ls -GFh'
-alias ll='ls -GFhl'
-alias la='ls -GFhla'
+
+if which colorls > /dev/null; then
+  alias ls='colorls'
+  alias ll='colorls -l'
+  alias la='colorls -a'
+  alias lc='colorls -lA --sd'
+fi
 
 alias mux=tmuxinator
 
