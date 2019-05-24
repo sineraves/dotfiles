@@ -229,11 +229,13 @@ let g:user_emmet_settings = {
       \  },
       \}
 
-" tmuxline.vim
-let g:tmuxline_powerline_separators = 0
-
 " vim-airline
-let g:airline_theme = 'dracula'
+if $ITERM_PROFILE == 'light'
+  let g:airline_theme = 'tomorrow'
+else
+  let g:airline_theme = 'zenburn'
+endif
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#ale#enabled = 1
 
 " vim-fzf
