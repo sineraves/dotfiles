@@ -25,4 +25,4 @@ alias biv='bundle install --path vendor/bundle'
 alias rake='noglob rake'
 
 alias ff='find * -type f | fzf'
-alias fv='vim $(fzf)'
+alias fv='nvim $(fzf)'
