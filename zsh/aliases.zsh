@@ -1,5 +1,7 @@
-alias e='exa -l'
-alias ea='exa -la'
+alias e='exa'
+alias el='exa -l'
+alias ea='exa -a'
+alias ec='exa -la --group-directories-first'
 
 if which colorls > /dev/null; then
   alias ls='colorls'
