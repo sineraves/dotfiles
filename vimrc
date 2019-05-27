@@ -135,8 +135,9 @@ augroup editing
       au!
 
       " set filetypes for given files/extensions
-      au BufRead *.md set filetype=markdown
-      au BufRead .{babel,jshint,eslint}rc set filetype=json
+      au BufNewFile,BufRead *.df set ft=dockerfile
+      au BufNewFile,BufRead *.md set filetype=markdown
+      au BufNewFile,BufRead .{babel,jshint,eslint}rc set filetype=json
       " return to same line when re-opening files
       au BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
