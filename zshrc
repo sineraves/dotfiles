@@ -27,7 +27,6 @@ if ! zgen saved; then
   zgen prezto editor
   zgen prezto history
   zgen prezto history-substring-search
-  # zgen prezto prompt
   zgen prezto ssh
   zgen prezto terminal
 
@@ -91,6 +90,9 @@ alias gl='git log --decorate --oneline'
 alias gs='git status --short'
 
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
+
+alias vi='nvim'
+alias vim='nvim'
 
 ################################################################################
 
