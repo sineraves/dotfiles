@@ -223,10 +223,6 @@ endif
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#ale#enabled = 1
 
-" vim-fzf
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --hidden --global "!_build/" --glob "!deps/" --glob "!.git/" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-
 " vim-gutentags
 let g:gutentags_ctags_exclude = [
       \ 'node_modules',
