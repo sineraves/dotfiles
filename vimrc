@@ -190,7 +190,7 @@ let g:ale_fixers = {
       \}
 let g:ale_fix_on_save = 1
 let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_elixir_elixir_ls_release = $HOME . '/Developer/Tools/elixir-ls/rel'
+let g:ale_elixir_elixir_ls_release = $HOME . '/Developer/Tools/elixir-ls'
 let g:ale_elixir_elixir_ls_config = {
       \ 'elixirLS': {
       \   'dialyzerEnabled': v:false,
