@@ -9,7 +9,7 @@ source $HOME/.dotfiles/vim/plugins.vim
 " ==============================================================================
 
 " a mighty good leader
-let mapleader = "\<Space>"
+let mapleader = ","
 " automatically refresh externally changed files
 set autoread
 " hide abandoned buffers (allows for leaving them unsaved)
@@ -127,12 +127,14 @@ endfunction
 function! s:smart_cr()
   return neosnippet#expandable_or_jumpable() ?
         \ "\<Plug>(neosnippet_expand_or_jump)"
+        \ : pumvisible() ? "\<c-y>"
         \ : "\<CR>" . EndwiseDiscretionary()
 endfunction
 
 augroup editing
       au!
 
+      au BufEnter * call ncm2#enable_for_buffer()
       " set filetypes for given files/extensions
       au BufNewFile,BufRead *.df set ft=dockerfile
       au BufNewFile,BufRead *.md set filetype=markdown
@@ -161,6 +163,11 @@ set ignorecase
 set smartcase
 " searches wrap around file
 set wrapscan
+
+" use rg for `grep` command (but prefer `:Rg`)
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+endif
 
 
 " ==============================================================================
@@ -235,9 +242,6 @@ let g:gutentags_ctags_exclude = [
 " vim-peekaboo
 let g:peekaboo_window = 'vertical botright 60new'
 
-" vim-test
-let test#strategy = 'dispatch'
-
 
 " ==============================================================================
 " Mappings
@@ -265,12 +269,9 @@ map <leader>= :EasyAlign =<cr>
 map <leader>; :EasyAlign :<cr>
 
 " quickly clear search highlights
-nnoremap <leader>c :noh<cr>
+nnoremap <leader><leader> :noh<cr>
 
-" quickly toggle goyo (focussed writing view)
-nmap <leader><leader> :Goyo<cr>
-
-" project search using custom Rg command and vim-fzf
+" project search using Rg command from vim-fzf
 nnoremap \ :Rg<space>
 
 " get to beginning/end of line when in insert mode
@@ -286,17 +287,12 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" fuzzy-find files and buffers with fzf
-nnoremap <leader>f :Files<cr>
-nnoremap <leader>gf :GFiles<cr>
-nnoremap <leader>bf :Buffers<cr>
-
-" vim-test mappings
-nmap <silent> <leader>t :w<CR>:TestNearest<CR>
-nmap <silent> <leader>T :w<CR>:TestFile<CR>
-nmap <silent> <leader>a :w<CR>:TestSuite<CR>
-nmap <silent> <leader>l :w<CR>:TestLast<CR>
-nmap <silent> <leader>g :w<CR>:TestVisit<CR>
+" fuzzy-find files, buffers, and tags with fzf
+nnoremap <leader>ff :Files<cr>
+nnoremap <leader>fg :GFiles<cr>
+nnoremap <leader>fb :Buffers<cr>
+nnoremap <leader>ft :BTags<cr>
+nnoremap <leader>fta :Tags<cr>
 
 " <Tab> behaviour
 imap <expr><TAB>

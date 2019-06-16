@@ -4,8 +4,6 @@ call plug#begin(s:plugged_dir)
 " Language / Syntax
 Plug 'sheerun/vim-polyglot'
 Plug 'slashmili/alchemist.vim'
-Plug 'tpope/vim-rails'
-Plug 'tweekmonster/django-plus.vim'
 
 " Editing
 Plug 'AndrewRadev/splitjoin.vim'
@@ -23,12 +21,21 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
 " Completion and Reference
+if has('nvim')
+  Plug 'roxma/nvim-yarp' | Plug 'ncm2/ncm2'
+  Plug 'ncm2/ncm2-bufword'
+  Plug 'ncm2/ncm2-cssomni'
+  Plug 'ncm2/ncm2-neosnippet'
+  Plug 'ncm2/ncm2-path'
+  Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
+  Plug 'ncm2/ncm2-vim-lsp'
+  Plug 'pbogut/ncm2-alchemist'
+endif
 Plug 'honza/vim-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/echodoc.vim'
 
 " Interface
-Plug 'lifepillar/vim-solarized8'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
 " Re-enable when there's a need to regenerate a tmux theme
@@ -39,11 +46,8 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-projectionist'
 
 " Testing, Linting, and Fixing
-Plug 'janko-m/vim-test'
 Plug 'w0rp/ale'
 Plug 'mhinz/vim-mix-format'
 
