@@ -127,7 +127,6 @@ endfunction
 function! s:smart_cr()
   return neosnippet#expandable_or_jumpable() ?
         \ "\<Plug>(neosnippet_expand_or_jump)"
-        \ : pumvisible() ? deoplete#mappings#close_popup()
         \ : "\<CR>" . EndwiseDiscretionary()
 endfunction
 
@@ -196,21 +195,6 @@ let g:ale_elixir_elixir_ls_config = {
       \   'dialyzerEnabled': v:false,
       \ }
       \}
-
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#source('elixir', 'min_pattern_length', 1)
-call deoplete#custom#option('ignore_sources', {
-      \ '_': ['tag'],
-      \ 'elixir': ['tag', 'omni'],
-      \ 'python': ['tag', 'omni']
-      \})
-call deoplete#custom#source('_', 'converters', [
-      \ 'converter_remove_paren',
-      \ 'converter_auto_delimiter',
-      \ 'converter_remove_overlap',
-      \ 'converter_truncate_abbr',
-      \ 'converter_truncate_menu',
-      \])
 
 " echodoc.vim
 let g:echodoc_enable_at_startup = 1
@@ -317,11 +301,6 @@ nmap <silent> <leader>T :w<CR>:TestFile<CR>
 nmap <silent> <leader>a :w<CR>:TestSuite<CR>
 nmap <silent> <leader>l :w<CR>:TestLast<CR>
 nmap <silent> <leader>g :w<CR>:TestVisit<CR>
-
-" neosnippet selection and expansion via deoplete
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " <Tab> behaviour
 imap <expr><TAB>

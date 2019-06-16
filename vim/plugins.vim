@@ -23,17 +23,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
 " Completion and Reference
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
 Plug 'honza/vim-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/echodoc.vim'
-Plug 'zchee/deoplete-jedi'
 
 " Interface
 Plug 'lifepillar/vim-solarized8'
