@@ -58,6 +58,9 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # https://github.com/rupa/z
 test -s /usr/local/etc/profile.d/z.sh && source /usr/local/etc/profile.d/z.sh
 
+# https://github.com/junegunn/fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 ################################################################################
 
 export PATH=/usr/local/sbin:/usr/local/bin:~/.local/bin:$PATH
