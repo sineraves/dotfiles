@@ -19,3 +19,6 @@
 [submodule "vendor/dracula"]
 	path = vendor/dracula
 	url = https://github.com/dracula/iterm.git
+[submodule "vendor/dracula-xcode"]
+	path = vendor/dracula-xcode
+	url = https://github.com/dracula/xcode.git
