@@ -78,7 +78,10 @@ export TERM=screen-256color
 
 ################################################################################
 
-alias doc='docker-compose'
+alias dc='docker-compose'
+alias dce='docker-compose exec'
+alias dcr='docker-compose run'
+
 alias e='exa'
 alias el='exa -l'
 alias ea='exa -a'
@@ -88,6 +91,8 @@ alias gd='git diff'
 alias gdc='git diff --cached'
 alias gl='git log --decorate --oneline'
 alias gs='git status --short'
+
+alias mux='tmuxinator'
 
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 
