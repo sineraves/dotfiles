@@ -202,6 +202,7 @@ let g:ale_elixir_elixir_ls_config = {
       \   'dialyzerEnabled': v:false,
       \ }
       \}
+let g:ale_python_auto_pipenv = 1
 
 " echodoc.vim
 let g:echodoc_enable_at_startup = 1

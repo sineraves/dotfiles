@@ -63,6 +63,7 @@ test -s /usr/local/etc/profile.d/z.sh && source /usr/local/etc/profile.d/z.sh
 ################################################################################
 
 export PATH=/usr/local/sbin:/usr/local/bin:~/.local/bin:$PATH
+export PATH=/usr/local/opt/python/libexec/bin:$PATH
 
 # decide `bat` theme from iTerm profile
 if [ "$ITERM_PROFILE" = 'dark' ]; then
