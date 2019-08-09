@@ -49,7 +49,7 @@ setopt nobeep
 
 ################################################################################
 
-# homebrew-installed tools
+# tools
 
 # https://github.com/rbenv/rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -59,6 +59,9 @@ test -s /usr/local/etc/profile.d/z.sh && source /usr/local/etc/profile.d/z.sh
 
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# iterm2 (3) shell integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 ################################################################################
 
