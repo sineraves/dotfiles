@@ -80,11 +80,15 @@ export ERL_AFLAGS='-kernel shell_history enabled'
 export LC_COLLATE=C # sort uppercase before lowercase
 export TERM=screen-256color
 
+export FZF_DEFAULT_COMMAND='rg --files'
+
 ################################################################################
 
 alias dc='docker-compose'
 alias dce='docker-compose exec'
 alias dcr='docker-compose run'
+
+alias dj='python manage.py'
 
 alias e='exa'
 alias el='exa -l'
