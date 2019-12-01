@@ -1,3 +1,8 @@
+# add homebrew completions to FPATH
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
 source "${HOME}/.zgen/zgen.zsh"
 
 if ! zgen saved; then
@@ -51,8 +56,8 @@ setopt nobeep
 
 # tools
 
-# https://github.com/rbenv/rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# iterm2 (3) shell integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # https://github.com/rupa/z
 test -s /usr/local/etc/profile.d/z.sh && source /usr/local/etc/profile.d/z.sh
@@ -60,13 +65,18 @@ test -s /usr/local/etc/profile.d/z.sh && source /usr/local/etc/profile.d/z.sh
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# iterm2 (3) shell integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+# https://github.com/asdf-vm/asdf
+[ -f $(brew --prefix asdf)/asdf.sh ] && source $(brew --prefix asdf)/asdf.sh
+[ -f $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash ] && source $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
+
+# https://github.com/SidOfc/cani
+[ -f ~/.config/cani/completions/_cani.zsh ] && source ~/.config/cani/completions/_cani.zsh
 
 ################################################################################
 
 export PATH=/usr/local/sbin:/usr/local/bin:~/.local/bin:$PATH
 export PATH=/usr/local/opt/python/libexec/bin:$PATH
+export PATH=/usr/local/opt/postgresql@11/bin:$PATH
 
 # decide `bat` theme from iTerm profile
 if [ "$ITERM_PROFILE" = 'dark' ]; then
