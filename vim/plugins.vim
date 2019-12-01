@@ -49,7 +49,7 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-eunuch'
 
 " Testing, Linting, and Fixing
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'mhinz/vim-mix-format'
 
 call plug#end()
