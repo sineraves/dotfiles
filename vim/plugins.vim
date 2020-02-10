@@ -47,6 +47,7 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-projectionist'
 
 " Testing, Linting, and Fixing
 Plug 'dense-analysis/ale'
