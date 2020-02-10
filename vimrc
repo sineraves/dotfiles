@@ -174,35 +174,53 @@ endif
 " Plugin Configuration
 " ==============================================================================
 
-" ale
-let g:ale_lint_on_text_changed = 'never'
+" let g:lsp_async_completion = 1
+" let g:lsp_diagnostics_enabled = 0
+" let g:lsp_signs_error   = {'text': '●'}
+" let g:lsp_signs_warning = {'text': '●'}
+" let g:lsp_signs_hint    = {'text': '●'}
+" highlight link LspWarningHighlight Todo
+" highlight link LspInformationHighlight Todo
+" highlight link LspErrorHighlight WarningMsg
+
+" augroup lsp
+"   au!
+"   au User lsp_setup call lsp#register_server({
+"         \ 'name': 'elixir-ls',
+"         \ 'cmd': {server_info->[&shell, &shellcmdflag, '~/Developer/Tools/elixir-ls/rel/language_server.sh']},
+"         \ 'whitelist': ['elixir', 'eelixir'],
+"         \ 'workspace_config': {'elixirLS': {'dialyzerEnabled': v:false}},
+"         \ })
+" augroup END
+
+" ale: general config
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_fix_on_save = 1
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_linters = {
-      \ 'elixir': ['credo', 'elixir-ls'],
-      \ 'python': ['flake8'],
-      \ 'ruby': ['reek', 'rubocop'],
-      \ 'css': ['stylelint'],
-      \ 'scss': ['stylelint']
-      \}
-let g:ale_fixers = {
-      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \ 'elixir': ['mix_format'],
-      \ 'javascript': ['prettier'],
-      \ 'python': ['black'],
-      \ 'css': ['stylelint'],
-      \ 'scss': ['stylelint']
-      \}
-let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 'always'
+
+" ale: language-specific config
+let g:ale_elixir_elixir_ls_release = '/Users/matt/Developer/Tools/elixir-ls/rel'
+let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
 let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_elixir_elixir_ls_release = $HOME . '/Developer/Tools/elixir-ls'
-let g:ale_elixir_elixir_ls_config = {
-      \ 'elixirLS': {
-      \   'dialyzerEnabled': v:false,
-      \ }
-      \}
 let g:ale_python_auto_pipenv = 1
+
+" ale: linters
+let g:ale_linters = {}
+let g:ale_linters.css = ['stylelint']
+let g:ale_linters.elixir = ['credo', 'elixir-ls']
+let g:ale_linters.python = ['flake8']
+let g:ale_linters.ruby = ['rubocop', 'ruby', 'solargraph']
+let g:ale_linters.scss = ['stylelint']
+
+" ale: fixers (overwrites files on save)
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
+let g:ale_fixers.css = ['stylelint']
+let g:ale_fixers.elixir = ['mix_format']
+let g:ale_fixers.javascript = ['prettier']
+let g:ale_fixers.python = ['black']
+let g:ale_fixers.scss = ['stylelint']
 
 " echodoc.vim
 let g:echodoc_enable_at_startup = 1

@@ -3,7 +3,6 @@ call plug#begin(s:plugged_dir)
 
 " Language / Syntax
 Plug 'sheerun/vim-polyglot'
-Plug 'slashmili/alchemist.vim'
 
 " Editing
 Plug 'AndrewRadev/splitjoin.vim'
@@ -30,7 +29,6 @@ if has('nvim')
   Plug 'ncm2/ncm2-path'
   Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
   Plug 'ncm2/ncm2-vim-lsp'
-  Plug 'pbogut/ncm2-alchemist'
 endif
 Plug 'honza/vim-snippets'
 Plug 'Shougo/neosnippet.vim'
@@ -50,6 +48,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-projectionist'
 
 " Testing, Linting, and Fixing
+Plug 'prabirshrestha/async.vim' | Plug 'prabirshrestha/vim-lsp'
 Plug 'dense-analysis/ale'
 Plug 'mhinz/vim-mix-format'
 
