@@ -1,21 +1,3 @@
-[submodule "vendor/zsh-autoenv"]
-	path = vendor/zsh-autoenv
-	url = https://github.com/Tarrasch/zsh-autoenv
-[submodule "vendor/zsh-history-substring-search"]
-	path = vendor/zsh-history-substring-search
-	url = https://github.com/zsh-users/zsh-history-substring-search
-[submodule "vendor/zsh-autosuggestions"]
-	path = vendor/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions
-[submodule "vendor/zsh-nvm"]
-	path = vendor/zsh-nvm
-	url = https://github.com/lukechilds/zsh-nvm.git
-[submodule "vendor/zsh-better-npm-completion"]
-	path = vendor/zsh-better-npm-completion
-	url = https://github.com/lukechilds/zsh-better-npm-completion.git
-[submodule "vendor/zsh-completions"]
-	path = vendor/zsh-completions
-	url = git://github.com/zsh-users/zsh-completions.git
 [submodule "vendor/dracula"]
 	path = vendor/dracula
 	url = https://github.com/dracula/iterm.git
