@@ -72,6 +72,12 @@ test -s /usr/local/etc/profile.d/z.sh && source /usr/local/etc/profile.d/z.sh
 # https://github.com/SidOfc/cani
 [ -f ~/.config/cani/completions/_cani.zsh ] && source ~/.config/cani/completions/_cani.zsh
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f ~/Lode/Tools/google-cloud-sdk/path.zsh.inc ]; then . ~/Lode/Tools/google-cloud-sdk/path.zsh.inc; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f ~/Lode/Tools/google-cloud-sdk/completion.zsh.inc ]; then . ~/Lode/Tools/google-cloud-sdk/completion.zsh.inc; fi
+
 ################################################################################
 
 export PATH=/usr/local/sbin:/usr/local/bin:~/.local/bin:$PATH
