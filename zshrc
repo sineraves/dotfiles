@@ -14,7 +14,6 @@ if ! zgen saved; then
   ZGEN_PREZTO_LOAD_DEFAULT=0
 
   # configure before loading modules
-  zgen prezto editor key-bindings 'vi'
   zgen prezto editor dot-expansion 'yes'
   zgen prezto utility:ls color 'yes'
   zgen prezto utility safe-ops 'no'
