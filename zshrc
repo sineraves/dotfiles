@@ -65,10 +65,6 @@ test -s /usr/local/etc/profile.d/z.sh && source /usr/local/etc/profile.d/z.sh
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# https://github.com/asdf-vm/asdf
-[ -f $(brew --prefix asdf)/asdf.sh ] && source $(brew --prefix asdf)/asdf.sh
-[ -f $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash ] && source $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
-
 # https://github.com/SidOfc/cani
 [ -f ~/.config/cani/completions/_cani.zsh ] && source ~/.config/cani/completions/_cani.zsh
 
@@ -146,3 +142,6 @@ function extract {
       echo "'$1' is not a valid file"
   fi
 }
+
+# https://github.com/asdf-vm/asdf
+[ -f $(brew --prefix asdf)/asdf.sh ] && source $(brew --prefix asdf)/asdf.sh
