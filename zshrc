@@ -3,6 +3,30 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
+# set spaceship options before sourcing anything
+# 'via ' is the default prompt prefix anyway,
+# but making it explicit in case I want to change later
+SPACESHIP_PROMPT_DEFAULT_PREFIX="via "
+SPACESHIP_PROMPT_ORDER=(
+  time
+  user
+  dir
+  git
+  package
+  node
+  ruby
+  elixir
+  rust
+  docker
+  aws
+  venv
+  exec_time
+  line_sep
+  jobs
+  exit_code
+  char
+)
+
 source "${HOME}/.zgen/zgen.zsh"
 
 if ! zgen saved; then
