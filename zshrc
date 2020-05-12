@@ -37,6 +37,9 @@ if ! zgen saved; then
   # will explicitly load modules, so skip defaults
   ZGEN_PREZTO_LOAD_DEFAULT=0
 
+  zgen oh-my-zsh plugins/docker
+  zgen oh-my-zsh plugins/docker-compose
+
   # configure before loading modules
   zgen prezto editor dot-expansion 'yes'
   zgen prezto utility:ls color 'yes'
