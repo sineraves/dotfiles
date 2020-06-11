@@ -12,13 +12,6 @@ SPACESHIP_PROMPT_ORDER=(
   user
   dir
   git
-  package
-  node
-  ruby
-  elixir
-  rust
-  docker
-  aws
   venv
   exec_time
   line_sep
