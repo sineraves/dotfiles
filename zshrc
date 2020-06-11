@@ -155,5 +155,13 @@ function extract {
   fi
 }
 
+function updatezgen {
+  zgen selfupdate
+  zgen update
+  exec -l $SHELL
+}
+
+################################################################################
+
 # https://github.com/asdf-vm/asdf
 [ -f $(brew --prefix asdf)/asdf.sh ] && source $(brew --prefix asdf)/asdf.sh
