@@ -112,6 +112,8 @@ export LC_COLLATE=C # sort uppercase before lowercase
 export TERM=screen-256color
 
 export FZF_DEFAULT_COMMAND='rg --files'
+# build OTP without javac
+export KERL_CONFIGURE_OPTIONS='--disable-debug --without-javac'
 
 ################################################################################
 
