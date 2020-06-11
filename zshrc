@@ -163,5 +163,23 @@ function updatezgen {
 
 ################################################################################
 
+# The citrix workspace app has no option to disable starting at login.
+# I rarely need it, so these functions allow for removing from and re-adding
+# to launchctl.
+
+function addcitrix {
+  launchctl load -w /Library/LaunchAgents/com.citrix.ServiceRecords.plist
+  launchctl load -w /Library/LaunchAgents/com.citrix.ReceiverHelper.plist
+  launchctl load -w /Library/LaunchAgents/com.citrix.AuthManager_Mac.plist
+}
+
+function removecitrix {
+  launchctl remove com.citrix.ServiceRecords
+  launchctl remove com.citrix.ReceiverHelper
+  launchctl remove com.citrix.AuthManager_Mac
+}
+
+################################################################################
+
 # https://github.com/asdf-vm/asdf
 [ -f $(brew --prefix asdf)/asdf.sh ] && source $(brew --prefix asdf)/asdf.sh

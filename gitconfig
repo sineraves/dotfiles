@@ -41,8 +41,9 @@
 [diff]
   tool = Kaleidoscope
 
-[include]
-  path = .gitconfig.user
+[user]
+  name = Matt Johnson
+  email = matt@heavyperil.com
 
 [filter "lfs"]
   required = true
@@ -50,4 +51,4 @@
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
 [gpg]
-	program = /usr/local/bin/gpg
+  program = /usr/local/bin/gpg
