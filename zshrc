@@ -118,15 +118,9 @@ export KERL_CONFIGURE_OPTIONS='--disable-debug --without-javac'
 ################################################################################
 
 alias dc='docker-compose'
-alias dce='docker-compose exec'
-alias dcr='docker-compose run'
-
-alias dj='python manage.py'
 
 alias e='exa'
-alias el='exa -l'
-alias ea='exa -a'
-alias ec='exa -la --group-directories-first'
+alias ee='exa -la --group-directories-first'
 
 alias gd='git diff'
 alias gdc='git diff --cached'
@@ -136,9 +130,6 @@ alias gs='git status --short'
 alias mux='tmuxinator'
 
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
-
-alias vi='nvim'
-alias vim='nvim'
 
 ################################################################################
 
