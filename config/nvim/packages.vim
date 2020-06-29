@@ -25,10 +25,10 @@ call minpac#add('andymass/vim-matchup')
 call minpac#add('editorconfig/editorconfig-vim')
 call minpac#add('junegunn/vim-easy-align')
 call minpac#add('junegunn/vim-peekaboo')
+call minpac#add('machakann/vim-sandwich')
 call minpac#add('tpope/vim-abolish')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-repeat')
-call minpac#add('tpope/vim-surround')
 
 " LSP
 call minpac#add('prabirshrestha/async.vim')
