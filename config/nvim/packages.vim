@@ -15,6 +15,8 @@ endif
 
 call minpac#init({'verbose': 0})
 
+call minpac#add('jiangmiao/auto-pairs')
+
 " Languages
 call minpac#add('elixir-lang/vim-elixir')
 call minpac#add('sheerun/vim-polyglot')
@@ -57,6 +59,8 @@ call minpac#add('ncm2/ncm2-ultisnips')
 call minpac#add('justinmk/vim-dirvish')
 call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
+
+call minpac#add('tpope/vim-projectionist')
 
 " Colours
 call minpac#add('dracula/vim', {'name': 'dracula'})
