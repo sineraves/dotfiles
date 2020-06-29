@@ -8,9 +8,15 @@ if !has('nvim') " load sensible neovim defaults on regular vim
   silent! runtime sensible.vim
 endif
 
+" disable rspec plugin in polyglot as it messes with linting
+" must be done before loading packages
+let g:polyglot_disabled = ['rspec']
+
 runtime packages.vim
+
 let g:loaded_netrwPlugin = 1
 
+let g:python3_host_prog = '/usr/local/bin/python3'
 set hidden                        " allow switching between unsaved buffers
 set splitbelow splitright         " sensible splits
 set nobackup noswapfile           " disable backups and swaps
@@ -54,6 +60,14 @@ set wildignore=*.o,*~,*/.git,*/tmp/*,*/node_modules/*,*/_build/*,*/deps/*,*/targ
 set fillchars=diff:⣿,vert:│,fold:·
 set list listchars=tab:»·,trail:·,nbsp:·
 
+if has("nvim")
+  set inccommand=nosplit          " live substitution preview
+end
+if has('patch-7.4.338')
+  let &showbreak = '↳ '
+  set breakindent                 " when wrapping, indent the lines
+  set breakindentopt=sbr
+endif
 
 " Editing ======================================================================
 
@@ -68,19 +82,21 @@ let g:html_indent_tags = ['p', 'li']  " indent p and li tags
 " fix end tag highlighting in html etc
 highlight link xmlEndTag xmlTag
 
-augroup editing
-  au!
+augroup vimrcEx
+  autocmd!
+  " Auto create directories for new files.
+  au BufWritePre,FileWritePre * call mkdir(expand('<afile>:p:h'), 'p')
 
-  " set filetypes for given files/extensions
-  au BufNewFile,BufRead *.df set ft=dockerfile
-  au BufNewFile,BufRead *.md set filetype=markdown
-  au BufNewFile,BufRead .{babel,jshint,eslint,stylelint}rc set filetype=json
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it for commit messages, when the position is invalid, or when
+  " inside an event handler (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
 
-  " return to same line when re-opening files
-  au BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \   execute 'normal! g`"zvzz' |
-        \ endif
+  autocmd BufNewFile,BufRead *.md set filetype=markdown
+  autocmd BufRead,BufNewFile .{babel,jshint,eslint,stylelint}rc set filetype=json
 augroup END
 
 " Completion & snippets ========================================================
@@ -111,32 +127,34 @@ endif
 
 " Plugin Configuration =========================================================
 
-" ale: general config
+" let g:ale_completion_enabled = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_fix_on_save = 1
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 'always'
-
-" ale: language-specific config
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_python_auto_pipenv = 1
+let g:ale_lint_delay = 100
+let g:ale_linters_explicit = 1
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '●'
+let g:ale_virtualtext_cursor = 1
 
 " ale: linters
-let g:ale_linters = {}
-let g:ale_linters.css = ['stylelint']
-let g:ale_linters.elixir = ['credo', 'elixir-ls']
-let g:ale_linters.python = ['flake8']
-let g:ale_linters.ruby = ['rubocop']
-let g:ale_linters.scss = ['stylelint']
+let g:ale_linters = {
+      \ 'css': ['stylelint'],
+      \ 'javascript': ['eslint'],
+      \ 'python': ['flake8'],
+      \ 'ruby': ['rubocop', 'rails_best_practices'],
+      \ 'scss': ['stylelint'],
+      \}
 
 " ale: fixers (overwrites files on save)
-let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
-let g:ale_fixers.css = ['stylelint']
-let g:ale_fixers.elixir = ['mix_format']
-let g:ale_fixers.javascript = ['prettier']
-let g:ale_fixers.python = ['black']
-let g:ale_fixers.scss = ['stylelint']
+let g:ale_fixers = {
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'css': ['stylelint'],
+      \ 'javascript': ['eslint'],
+      \ 'python': ['black'],
+      \ 'ruby': ['rubocop'],
+      \ 'scss': ['stylelint'],
+      \}
 
 " vim-airline
 if $ITERM_PROFILE == 'light'
@@ -150,10 +168,7 @@ let g:airline#extensions#ale#enabled = 1
 " vim-gutentags
 let g:gutentags_ctags_exclude = [
       \ 'node_modules',
-      \ 'vendor',
-      \ '.elixir_ls',
-      \ 'dist',
-      \ '_build'
+      \ 'vendor'
       \]
 
 " vim-peekaboo
@@ -161,44 +176,25 @@ let g:peekaboo_window = 'vertical botright 60new'
 
 " vim-projectionist
 let g:projectionist_heuristics = {}
-let g:projectionist_heuristics['mix.exs'] = {
-      \ 'apps/*/mix.exs': { 'type': 'app' },
-      \ 'lib/*.ex': {
-      \   'type': 'lib',
-      \   'alternate': 'test/{}_test.exs',
-      \   'template': ['defmodule {camelcase|capitalize|dot} do', 'end'],
+" Rails
+let g:projectionist_heuristics['config/environment.rb'] = {
+      \ 'app/*.rb': {
+      \   'alternate': 'spec/{}_spec.rb'
       \ },
-      \ 'test/*_test.exs': {
-      \   'type': 'test',
-      \   'alternate': 'lib/{}.ex',
-      \   'template': [
-      \       'defmodule {camelcase|capitalize|dot}Test do',
-      \       '  use ExUnit.Case',
-      \       '',
-      \       '  alias {camelcase|capitalize|dot}, as: Subject',
-      \       '',
-      \       '  doctest Subject',
-      \       'end'
-      \   ],
+      \ 'lib/*.rb': {
+      \   'alternate': 'spec/lib/{}_spec.rb'
       \ },
-      \ 'mix.exs': { 'type': 'mix' },
-      \ 'config/*.exs': { 'type': 'config' },
-      \ '*.ex': {
-      \   'makery': {
-      \     'lint': { 'compiler': 'credo' },
-      \     'test': { 'compiler': 'exunit' },
-      \     'build': { 'compiler': 'mix' }
-      \   }
+      \ 'spec/lib/*_spec.rb': {
+      \   'alternate': 'lib/{}.rb'
       \ },
-      \ '*.exs': {
-      \   'makery': {
-      \     'lint': { 'compiler': 'credo' },
-      \     'test': { 'compiler': 'exunit' },
-      \     'build': { 'compiler': 'mix' }
-      \   }
+      \ 'spec/*_spec.rb': {
+      \   'alternate': 'app/{}.rb'
       \ }
-      \ }
+      \}
 
+let g:AutoPairsMapCR=0
+inoremap <silent> <Plug>(MyCR) <CR><C-R>=AutoPairsReturn()<CR>
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<Plug>(MyCR)", 'im')
 
 " Key mappings =================================================================
 
@@ -248,7 +244,12 @@ nnoremap <leader>fg :GFiles<cr>
 nnoremap <leader>fb :Buffers<cr>
 nnoremap <leader>ft :BTags<cr>
 nnoremap <leader>fta :Tags<cr>
+nnoremap <leader>fh :History<cr>
 
 " <Tab> behaviour
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" go to next ale issue
+nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>ap :ALEPreviousWrap<cr>
