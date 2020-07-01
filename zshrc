@@ -111,7 +111,7 @@ export ERL_AFLAGS='-kernel shell_history enabled'
 export LC_COLLATE=C # sort uppercase before lowercase
 export TERM=screen-256color
 
-export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git' -g '!.keep'"
 # build OTP without javac
 export KERL_CONFIGURE_OPTIONS='--disable-debug --without-javac'
 
