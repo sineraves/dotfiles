@@ -15,8 +15,6 @@ endif
 
 call minpac#init({'verbose': 0})
 
-call minpac#add('jiangmiao/auto-pairs')
-
 " Languages
 call minpac#add('elixir-lang/vim-elixir')
 call minpac#add('sheerun/vim-polyglot')
@@ -30,6 +28,7 @@ call minpac#add('junegunn/vim-peekaboo')
 call minpac#add('machakann/vim-sandwich')
 call minpac#add('tpope/vim-abolish')
 call minpac#add('tpope/vim-commentary')
+call minpac#add('tpope/vim-endwise')
 call minpac#add('tpope/vim-repeat')
 
 " LSP
