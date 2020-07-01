@@ -142,7 +142,7 @@ let g:ale_linters = {
       \ 'css': ['stylelint'],
       \ 'javascript': ['eslint'],
       \ 'python': ['flake8'],
-      \ 'ruby': ['rubocop', 'rails_best_practices'],
+      \ 'ruby': ['rubocop'],
       \ 'scss': ['stylelint'],
       \}
 
