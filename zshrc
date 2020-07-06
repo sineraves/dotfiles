@@ -106,7 +106,7 @@ elif [ "$ITERM_PROFILE" = 'light' ]; then
   export BAT_THEME='Monokai Extended Light'
 fi
 
-export EDITOR='nvim'
+export VISUAL='nvim'
 export ERL_AFLAGS='-kernel shell_history enabled'
 export LC_COLLATE=C # sort uppercase before lowercase
 export TERM=screen-256color
