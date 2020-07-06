@@ -104,17 +104,6 @@ augroup END
 set completeopt=noinsert,menuone,noselect
 set shortmess+=c
 
-" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
-inoremap <c-c> <ESC>
-
-autocmd BufEnter * call ncm2#enable_for_buffer()
-
-" c-j c-k for moving in snippet
-let g:UltiSnipsExpandTrigger		= "<Plug>(ultisnips_expand)"
-let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
-let g:UltiSnipsRemoveSelectModeMappings = 0
-
 
 " Search =======================================================================
 
@@ -125,13 +114,42 @@ if executable('rg')               " use rg for `grep` command (but prefer `:Rg`)
 endif
 
 
+" Neovim terminal ==============================================================
+
+if has('nvim')
+  " Make difference between vim and term cursors clearer
+  highlight! link TermCursor Cursor
+  highlight! TermCursorNC guibg=red guifg=white ctermbg=1 ctermfg=15
+
+  " Avoid nesting nvim instances when opening files from within `:terminal`,
+  " either manually, or via commands that use `$VISUAL` (eg `git commit`)
+  " Requires https://github.com/mhinz/neovim-remote
+  if executable('nvr')
+    let $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+  endif
+endif
+
+
 " Plugin Configuration =========================================================
+
+
+" Enable ncm everywhere
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
+let g:UltiSnipsSnippetDirectories       = ['pack/minpac/opt/vim-snippets/UltiSnips']
+let g:UltiSnipsExpandTrigger            = "<Plug>(ultisnips_expand)"
+let g:UltiSnipsJumpForwardTrigger       = "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger      = "<c-k>"
+let g:UltiSnipsRemoveSelectModeMappings = 0
+
+" Without this, vim-endwise conflicts with ncm/snippets
+let g:endwise_no_mappings = 1
 
 " let g:ale_completion_enabled = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_fix_on_save = 1
 let g:ale_lint_delay = 100
 let g:ale_linters_explicit = 1
+let g:ale_ruby_rubocop_executable = expand('~/.asdf/shims/rubocop')
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '●'
@@ -192,14 +210,18 @@ let g:projectionist_heuristics['config/environment.rb'] = {
       \ }
       \}
 
-let g:AutoPairsMapCR=0
-inoremap <silent> <Plug>(MyCR) <CR><C-R>=AutoPairsReturn()<CR>
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<Plug>(MyCR)", 'im')
+" vim-test
+let test#strategy = 'dispatch'
+let test#ruby#rspec#executable = 'docker-compose exec web ./bin/rspec'
 
 " Key mappings =================================================================
 
 " faster escape from insert mode
 inoremap jk <ESC>
+
+if has('nvim')
+  tnoremap jk <C-\><C-n>
+endif
 
 " add blank lines without ending up in insert mode
 map <leader>o o<Esc>
@@ -246,10 +268,32 @@ nnoremap <leader>ft :BTags<cr>
 nnoremap <leader>fta :Tags<cr>
 nnoremap <leader>fh :History<cr>
 
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
+
 " <Tab> behaviour
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" When the popup menu is visible, move to the next item.
+" When the popup menu isn't visible, and there is only one snippet, expand it.
+" Otherwise, insert a <Tab> (honouring expandtab settings etc)
+function! SmartTab()
+  if pumvisible()
+    return "\<C-n>"
+  elseif (len(UltiSnips#SnippetsInCurrentScope()) == 1)
+    return UltiSnips#ExpandSnippet()
+  else
+    return "\<Tab>"
+  endif
+endfunction
+inoremap <silent><Tab> <C-R>=SmartTab()<cr>
+
+" <S-Tab> behaviour
+" Move to previous item when popup menu is visible
+inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Ultisnips
+inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 
 " go to next ale issue
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
+nnoremap <leader>af :ALEFix<cr>

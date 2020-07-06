@@ -32,13 +32,10 @@ call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-endwise')
 call minpac#add('tpope/vim-repeat')
 
-" LSP
-call minpac#add('prabirshrestha/async.vim')
-call minpac#add('prabirshrestha/vim-lsp')
-
-" Linting & fixing
+" Linting, fixing, and testing
 call minpac#add('dense-analysis/ale')
 call minpac#add('mhinz/vim-mix-format')
+call minpac#add('vim-test/vim-test')
 
 " Completion
 call minpac#add('roxma/nvim-yarp')
@@ -60,6 +57,8 @@ call minpac#add('justinmk/vim-dirvish')
 call minpac#add('junegunn/fzf')
 call minpac#add('junegunn/fzf.vim')
 
+call minpac#add('tpope/vim-dispatch')
+call minpac#add('radenling/vim-dispatch-neovim')
 call minpac#add('tpope/vim-projectionist')
 
 " Colours
