@@ -13,7 +13,7 @@ source ~/.zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.z
 ################################################################################
 
 # https://github.com/rupa/z
-[ -f $(brew --prefix z)/etc/profile.d/z.sh ] && source $(brew --prefix z)/etc/profile.d/z.sh
+[ -f /usr/local/opt/z/etc/profile.d/z.sh ] && source /usr/local/opt/z/etc/profile.d/z.sh
 
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -22,4 +22,4 @@ source ~/.zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.z
 [ -f ~/.config/cani/completions/_cani.zsh ] && source ~/.config/cani/completions/_cani.zsh
 
 # https://github.com/asdf-vm/asdf
-[ -f $(brew --prefix asdf)/asdf.sh ] && source $(brew --prefix asdf)/asdf.sh
+[ -f /usr/local/opt/asdf/asdf.sh ] && source /usr/local/opt/asdf/asdf.sh

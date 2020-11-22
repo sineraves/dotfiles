@@ -40,4 +40,4 @@ HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=10000
 
-setopt promptsubst
+setopt PROMPT_SUBST
