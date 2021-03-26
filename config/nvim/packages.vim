@@ -12,6 +12,9 @@ function! PackInit() abort
   call minpac#add('sheerun/vim-polyglot')
   call minpac#add('lepture/vim-jinja')
 
+  call minpac#add('neovim/nvim-lspconfig')
+  call minpac#add('nvim-lua/completion-nvim')
+  call minpac#add('nvim-lua/lsp_extensions.nvim')
 
   " Text manipulation
   call minpac#add('AndrewRadev/splitjoin.vim')
