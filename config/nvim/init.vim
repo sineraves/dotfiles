@@ -177,10 +177,10 @@ let test#ruby#rspec#executable = 'docker-compose exec web ./bin/rspec'
 " Key mappings =================================================================
 
 " faster escape from insert mode
-inoremap jk <ESC>
+inoremap jj <ESC>
 
 if has('nvim')
-  tnoremap jk <C-\><C-n>
+  tnoremap jj <C-\><C-n>
 endif
 
 " add blank lines without ending up in insert mode
