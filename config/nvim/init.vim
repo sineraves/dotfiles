@@ -16,7 +16,7 @@ runtime packages.vim
 
 let g:loaded_netrwPlugin = 1
 
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = expand('~/.asdf/shims/python3')
 set hidden                        " allow switching between unsaved buffers
 set splitbelow splitright         " sensible splits
 set nobackup noswapfile           " disable backups and swaps
