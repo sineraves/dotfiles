@@ -14,7 +14,7 @@ source ~/.zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.z
 ################################################################################
 
 # https://github.com/rupa/z
-[ -f /usr/local/opt/z/etc/profile.d/z.sh ] && source /usr/local/opt/z/etc/profile.d/z.sh
+[ -f /usr/local/etc/profile.d/z.sh ] && source /usr/local/etc/profile.d/z.sh
 
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
