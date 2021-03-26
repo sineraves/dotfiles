@@ -33,6 +33,9 @@ function! PackInit() abort
 
   " File navigation
   call minpac#add('justinmk/vim-dirvish')
+  call minpac#add('nvim-lua/popup.nvim')
+  call minpac#add('nvim-lua/plenary.nvim')
+  call minpac#add('nvim-telescope/telescope.nvim')
 
   call minpac#add('tpope/vim-dispatch')
   call minpac#add('radenling/vim-dispatch-neovim')
