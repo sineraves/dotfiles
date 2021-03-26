@@ -133,46 +133,7 @@ endif
 " Plugin Configuration =========================================================
 
 
-" Enable ncm everywhere
-autocmd BufEnter * call ncm2#enable_for_buffer()
 
-let g:UltiSnipsSnippetDirectories       = ['pack/minpac/opt/vim-snippets/UltiSnips']
-let g:UltiSnipsExpandTrigger            = "<Plug>(ultisnips_expand)"
-let g:UltiSnipsJumpForwardTrigger       = "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger      = "<c-k>"
-let g:UltiSnipsRemoveSelectModeMappings = 0
-
-" Without this, vim-endwise conflicts with ncm/snippets
-let g:endwise_no_mappings = 1
-
-" let g:ale_completion_enabled = 1
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_lint_delay = 100
-let g:ale_linters_explicit = 1
-let g:ale_ruby_rubocop_executable = expand('~/.asdf/shims/rubocop')
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '●'
-let g:ale_virtualtext_cursor = 1
-
-" ale: linters
-let g:ale_linters = {
-      \ 'css': ['stylelint'],
-      \ 'javascript': ['eslint'],
-      \ 'python': ['flake8'],
-      \ 'ruby': ['rubocop'],
-      \ 'scss': ['stylelint'],
-      \}
-
-" ale: fixers (overwrites files on save)
-let g:ale_fixers = {
-      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \ 'css': ['stylelint'],
-      \ 'javascript': ['eslint'],
-      \ 'python': ['black'],
-      \ 'ruby': ['rubocop'],
-      \ 'scss': ['stylelint'],
-      \}
 
 " vim-airline
 if $ITERM_PROFILE == 'light'
@@ -181,7 +142,6 @@ else
   let g:airline_theme = 'zenburn'
 endif
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#ale#enabled = 1
 
 " vim-gutentags
 let g:gutentags_ctags_exclude = [
@@ -260,40 +220,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-" fuzzy-find files, buffers, and tags with fzf
-nnoremap <leader>ff :Files<cr>
-nnoremap <leader>fg :GFiles<cr>
-nnoremap <leader>fb :Buffers<cr>
-nnoremap <leader>ft :BTags<cr>
-nnoremap <leader>fta :Tags<cr>
-nnoremap <leader>fh :History<cr>
 
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
-
-" <Tab> behaviour
-" When the popup menu is visible, move to the next item.
-" When the popup menu isn't visible, and there is only one snippet, expand it.
-" Otherwise, insert a <Tab> (honouring expandtab settings etc)
-function! SmartTab()
-  if pumvisible()
-    return "\<C-n>"
-  elseif (len(UltiSnips#SnippetsInCurrentScope()) == 1)
-    return UltiSnips#ExpandSnippet()
-  else
-    return "\<Tab>"
-  endif
-endfunction
-inoremap <silent><Tab> <C-R>=SmartTab()<cr>
-
-" <S-Tab> behaviour
-" Move to previous item when popup menu is visible
-inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Ultisnips
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-
-" go to next ale issue
-nnoremap <leader>an :ALENextWrap<cr>
-nnoremap <leader>ap :ALEPreviousWrap<cr>
-nnoremap <leader>af :ALEFix<cr>

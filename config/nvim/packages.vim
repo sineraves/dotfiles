@@ -1,69 +1,49 @@
-let s:current_file = expand('<sfile>')
-if !exists('*packages#reload')
-  func! packages#reload() abort
-    exec 'source ' . s:current_file
-  endfunc
-endif
+function! PackInit() abort
+  packadd minpac
 
-command! -bar PackUpdate packadd minpac | call packages#reload() | redraw | call minpac#update() | call minpac#status()
-command! -bar PackClean  packadd minpac | call packages#reload() | call minpac#clean()
-command! -bar PackStatus packadd minpac | call packages#reload() | call minpac#status()
+  call minpac#init({
+        \     'progress_open': 'vertical',
+        \     'status_open': 'vertical',
+        \     'status_auto': 1
+        \   })
+  call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-if !exists('*minpac#init')
-  finish
-endif
+  " Languages
+  call minpac#add('sheerun/vim-polyglot')
+  call minpac#add('lepture/vim-jinja')
 
-call minpac#init({'verbose': 0})
 
-" Languages
-call minpac#add('elixir-lang/vim-elixir')
-call minpac#add('sheerun/vim-polyglot')
+  " Text manipulation
+  call minpac#add('AndrewRadev/splitjoin.vim')
+  call minpac#add('andymass/vim-matchup')
+  call minpac#add('editorconfig/editorconfig-vim')
+  call minpac#add('junegunn/vim-easy-align')
+  call minpac#add('junegunn/vim-peekaboo')
+  call minpac#add('machakann/vim-sandwich')
+  call minpac#add('mattn/emmet-vim')
+  call minpac#add('tpope/vim-abolish')
+  call minpac#add('tpope/vim-commentary')
+  call minpac#add('tpope/vim-repeat')
 
-" Text manipulation
-call minpac#add('AndrewRadev/splitjoin.vim')
-call minpac#add('andymass/vim-matchup')
-call minpac#add('editorconfig/editorconfig-vim')
-call minpac#add('junegunn/vim-easy-align')
-call minpac#add('junegunn/vim-peekaboo')
-call minpac#add('machakann/vim-sandwich')
-call minpac#add('mattn/emmet-vim')
-call minpac#add('tpope/vim-abolish')
-call minpac#add('tpope/vim-commentary')
-call minpac#add('tpope/vim-endwise')
-call minpac#add('tpope/vim-repeat')
+  " Linting, fixing, and testing
+  call minpac#add('vim-test/vim-test')
 
-" Linting, fixing, and testing
-call minpac#add('dense-analysis/ale')
-call minpac#add('mhinz/vim-mix-format')
-call minpac#add('vim-test/vim-test')
+  " File navigation
+  call minpac#add('justinmk/vim-dirvish')
 
-" Completion
-call minpac#add('roxma/nvim-yarp')
-call minpac#add('ncm2/ncm2')
-call minpac#add('ncm2/float-preview.nvim')
-call minpac#add('ncm2/ncm2-bufword')
-call minpac#add('ncm2/ncm2-path')
-call minpac#add('ncm2/ncm2-vim-lsp')
-call minpac#add('ncm2/ncm2-html-subscope')
-call minpac#add('ncm2/ncm2-markdown-subscope')
+  call minpac#add('tpope/vim-dispatch')
+  call minpac#add('radenling/vim-dispatch-neovim')
+  call minpac#add('tpope/vim-projectionist')
 
-" Snippets
-call minpac#add('SirVer/ultisnips')
-call minpac#add('honza/vim-snippets', {'type': 'opt'})
-call minpac#add('ncm2/ncm2-ultisnips')
+  " Colours & UI
+  call minpac#add('dracula/vim', {'name': 'dracula'})
+  call minpac#add('chriskempson/base16-vim')
+  call minpac#add('lifepillar/vim-solarized8')
+  call minpac#add('vim-airline/vim-airline')
+  call minpac#add('vim-airline/vim-airline-themes')
+  call minpac#add('edkolev/tmuxline.vim')
+endfunction
 
-" Fuzzy finder
-call minpac#add('justinmk/vim-dirvish')
-call minpac#add('junegunn/fzf')
-call minpac#add('junegunn/fzf.vim')
-
-call minpac#add('tpope/vim-dispatch')
-call minpac#add('radenling/vim-dispatch-neovim')
-call minpac#add('tpope/vim-projectionist')
-
-" Colours
-call minpac#add('dracula/vim', {'name': 'dracula'})
-
-call minpac#add('vim-airline/vim-airline')
-call minpac#add('vim-airline/vim-airline-themes')
-call minpac#add('edkolev/tmuxline.vim')
+command! PackUpdate source $MYVIMRC | call PackInit() | call minpac#update()
+command! PackClean  source $MYVIMRC | call PackInit() | call minpac#clean()
+command! PackStatus call PackInit() | call minpac#status()
