@@ -1,3 +1,5 @@
+alias be='bundle exec'
+
 alias dc='docker-compose'
 
 alias e='exa'

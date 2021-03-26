@@ -1,8 +1,13 @@
-# Use brew installed python 3 instead of system 2.7
-path=(/usr/local/opt/python@3.9/libexec/bin /usr/local/sbin $path)
+path=(
+  /usr/local/opt/postgresql@12/bin
+  /usr/local/sbin
+  ~/.local/bin
+  $path
+)
 export PATH
 
 export CLICOLOR=1
+export EDITOR=nvim
 export LC_COLLATE=C
 export TERM=screen-256color
 export VISUAL=nvim
