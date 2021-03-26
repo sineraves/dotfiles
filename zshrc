@@ -6,6 +6,7 @@ source ~/.zsh/functions.zsh
 source ~/.zsh/keys.zsh
 source ~/.zsh/prompt.zsh
 
+source ~/.zsh/plugins/zsh-autoenv/autoenv.zsh
 source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 source ~/.zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
