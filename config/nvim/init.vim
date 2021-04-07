@@ -155,56 +155,8 @@ let g:diagnostic_enable_virtual_text = 1
 let g:space_before_virtual_text = 1
 let g:diagnostic_insert_delay = 1
 
-lua << EOF
-  local nvim_lsp = require'lspconfig'
-  local completion = require'completion'
-
-  -- function to attach completion when setting up lsp
-  local on_attach = function(client)
-    completion.on_attach(client)
-  end
-
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-  -- enable rust analyzer
-  nvim_lsp.rust_analyzer.setup({
-    on_attach=on_attach,
-    settings = {
-      ["rust-analyzer"] = {
-        cargo = {
-          loadOutDirsFromCheck = true
-        },
-        procMacro = {
-          enable = true
-        },
-      }
-    }
-  })
-
-  -- enable solargraph
-  nvim_lsp.solargraph.setup({})
-
-  -- enable diagnostics
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-      virtual_text = false,
-      signs = true,
-      update_in_insert = true
-    }
-  )
-EOF
-
-" Code navigation shortcuts as found in :help lsp
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+" Configure LSP in lua
+:lua require'lsp'
 
 " Trigger completion with <tab>
 " found in :help completion
@@ -222,13 +174,6 @@ set updatetime=300
 " Goto previous/next diagnostic warning/error
 nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-
-augroup lsp
-  autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
-  " Enable Rust type inlay hints
-  autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
-        \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
-augroup END
 
 " Language-specific config =====================================================
 
