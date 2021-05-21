@@ -2,10 +2,8 @@
 --
 -- Requires language servers to be installed.
 --
--- CSS/SCSS:
---   `npm install -g vscode-css-languageserver-bin`
--- Diagnostics (linter/formatter integration):
---   `npm i -g diagnostic-languageserver`
+-- EFM (linter/formatter integration):
+--   `brew install efm-langserver`
 -- Ruby:
 --   `gem install solargraph`
 -- Rust:
@@ -17,7 +15,7 @@ local api = vim.api
 local nvim_lsp = require'lspconfig'
 
 -- function to attach completion when setting up lsp
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- Set omnifunc
   vim.api.nvim_buf_set_option(bufnr or 0, "omnifunc", "v:lua.vim.lsp.omnifunc")
   require "completion".on_attach()
@@ -37,19 +35,13 @@ local on_attach = function(_, bufnr)
   api.nvim_set_keymap("n", "gW", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", options)
   api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", options)
   api.nvim_set_keymap("n", "<leader>F", "<cmd>lua vim.lsp.buf.formatting()<CR>", options)
-  -- map("n", ",a", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-  -- map("n", ",R", "<cmd>lua vim.lsp.buf.rename()<CR>")
-  -- map("n", ",e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
-  -- map("n", ",s", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>")
 
-  vim.api.nvim_command([[
-augroup Lsp
-    " autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
-    " autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
-    "       \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
-    autocmd BufWritePre *.rb,*.rs,*.js,*.ts lua vim.lsp.buf.formatting()
-augroup END 
-]])
+  if client.resolved_capabilities.document_formatting then
+    vim.cmd [[augroup Format]]
+    vim.cmd [[autocmd! * <buffer>]]
+    vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+    vim.cmd [[augroup END]]
+  end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -83,7 +75,48 @@ nvim_lsp.solargraph.setup{
 
 -- enable tsserver (typescript/javascript)
 nvim_lsp.tsserver.setup{
-  on_attach = on_attach
+  on_attach = function(client)
+    -- disable formatting - it's handled by efm>prettier
+    client.resolved_capabilities.document_formatting = false
+    on_attach(client)
+  end
+}
+
+-- code formatting with efm-langserver
+-- only using prettier at the moment
+local fmtPrettier = {
+  formatCommand = "./node_modules/.bin/prettier --stdin-filepath ${INPUT}",
+  formatStdin = true
+}
+
+nvim_lsp.efm.setup{
+  on_attach = on_attach,
+  init_options = {documentFormatting = true},
+  filetypes = {
+    'css',
+    'html',
+    'javascript',
+    'javascriptreact',
+    'json',
+    'markdown',
+    'scss',
+    'typescript',
+    'typescriptreact'
+  },
+  settings = {
+    rootMarkers = {".git/"},
+    languages = {
+      css = {fmtPrettier},
+      html = {fmtPrettier},
+      javascript = {fmtPrettier},
+      javascriptreact = {fmtPrettier},
+      json = {fmtPrettier},
+      markdown = {fmtPrettier},
+      scss = {fmtPrettier},
+      typescript = {fmtPrettier},
+      typescriptreact = {fmtPrettier}
+    }
+  }
 }
 
 -- enable diagnostics
@@ -94,91 +127,6 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     signs = true,
     update_in_insert = false
   })
-
--- dignostic server configuration
-nvim_lsp.diagnosticls.setup {
-  on_attach = on_attach,
-  filetypes = {
-    'javascript',
-    'typescript',
-    'javascriptreact',
-    'typescriptreact',
-    'html',
-    'css',
-    'scss'
-  },
-  init_options = {
-    filetypes = {
-      javascript = 'eslint',
-      typescript = 'eslint',
-      javascriptreact = 'eslint',
-      typescriptreact = 'eslint'
-    },
-    formatFiletypes = {
-      javascript = 'prettier',
-      typescript = 'prettier',
-      javascriptreact = 'prettier',
-      typescriptreact = 'prettier',
-      css = 'prettier',
-      scss = 'prettier',
-      html = 'prettier'
-    },
-    linters = {
-      eslint = {
-        sourceName = 'eslint',
-        command = './node_modules/.bin/eslint',
-        debounce = 100,
-        args = {
-          '--stdin',
-          '--stdin-filename',
-          '%filepath',
-          '--format',
-          'json',
-        },
-        parseJson = {
-          errorsRoot = '[0].messages',
-          line = 'line',
-          column = 'column',
-          endLine = 'endLine',
-          endColumn = 'endColumn',
-          message = '${message} [${ruleId}]',
-          security = 'severity',
-        },
-        securities = {
-          [2] = 'error',
-          [1] = 'warning'
-        },
-        rootPatterns = {
-          '.eslintrc.js',
-          '.eslintrc.cjs',
-          '.eslintrc.yaml',
-          '.eslintrc.yml',
-          '.eslintrc.json',
-          '.eslintrc',
-          'package.json',
-        },
-      }
-    },
-    formatters = {
-      prettier = {
-        command = './node_modules/.bin/prettier',
-        args = {
-          '--stdin-filepath',
-          '%filepath'
-        },
-        rootPatterns = {
-          '.prettierrc',
-          '.prettierrc.cjs',
-          '.prettierrc.js',
-          '.prettierrc.json',
-          '.prettierrc.toml',
-          'prettier.config.cjs',
-          'prettier.config.js',
-        },
-      }
-    }
-  }
-}
 
 
 -- Peek definition
