@@ -1,5 +1,22 @@
-# dotfiles
+# .dotfiles
 
-Odds and sods.
 
-ZSH config cribbed from https://github.com/spicycode/ze-best-zsh-config
+
+Config.
+
+Mainly ZSH, Neovim, and Tmux, with some other handy defaults.
+
+
+
+## Neovim
+
+Neovim expects the following language servers to be installed:
+
+* EFM (linter/formatter integration): 
+  `brew install efm-langserver`
+* Solargraph: 
+  `gem install solargraph`
+* Rust Analyzer: 
+  https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
+* TypeScript Language Server: 
+  `npm install -g typescript && npm install -g typescript-language-server`
