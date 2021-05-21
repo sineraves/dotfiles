@@ -9,6 +9,7 @@ function! PackInit() abort
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   " Languages
+  call minpac#add('LunarWatcher/auto-pairs', { 'rev': '*' })
   call minpac#add('sheerun/vim-polyglot')
   call minpac#add('lepture/vim-jinja')
 

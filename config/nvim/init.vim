@@ -181,6 +181,9 @@ let g:rustfmt_autosave = 1
 
 " Plugin Configuration =========================================================
 
+" auto-pairs
+let g:AutoPairsCompatibleMaps = 0
+
 " vim-airline
 if $ITERM_PROFILE == 'light'
   let g:airline_theme = 'tomorrow'
@@ -218,7 +221,7 @@ let g:projectionist_heuristics['config/environment.rb'] = {
 
 " vim-test
 let test#strategy = 'dispatch'
-let test#ruby#rspec#executable = 'docker-compose exec web ./bin/rspec'
+let test#ruby#rspec#executable = 'bundle exec rspec'
 
 " Key mappings =================================================================
 
