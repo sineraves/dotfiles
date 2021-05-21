@@ -2,4 +2,5 @@ bundler
 cani
 pry
 rubocop
+rubocop-performance
 tmuxinator
