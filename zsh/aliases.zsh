@@ -1,6 +1,6 @@
 alias be='bundle exec'
 
-alias dc='docker-compose'
+alias dc='docker compose'
 
 alias e='exa'
 alias ee='exa -la --group-directories-first'
