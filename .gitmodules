@@ -22,3 +22,6 @@
 [submodule "zsh/plugins/zsh-autoenv"]
 	path = zsh/plugins/zsh-autoenv
 	url = git@github.com:Tarrasch/zsh-autoenv.git
+[submodule "raycast/script-commands"]
+	path = raycast/script-commands
+	url = git@github.com:raycast/script-commands.git
