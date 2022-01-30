@@ -1,4 +1,5 @@
 path=(
+  /usr/local/opt/sqlite/bin
   /usr/local/opt/postgresql@12/bin
   /usr/local/sbin
   ~/.local/bin
@@ -13,7 +14,8 @@ export TERM=screen-256color
 export VISUAL=nvim
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git' -g '!.keep'"
-export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
+export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib -L/usr/local/opt/sqlite/lib"
+export CPPFLAGS="-I/usr/local/opt/sqlite/include"
 
 # decide `bat` theme from iTerm profile
 if [ "$ITERM_PROFILE" = 'dark' ]; then
