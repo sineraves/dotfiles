@@ -1,24 +1,12 @@
-[submodule "config/nvim/pack/minipac/opt/minipac"]
-	path = config/nvim/pack/minipac/opt/minipac
-	url = git@github.com:k-takata/minpac.git
-[submodule "zsh/completion/zsh-completions"]
-	path = zsh/completion/zsh-completions
-	url = git://github.com/zsh-users/zsh-completions.git
 [submodule "zsh/plugins/fast-syntax-highlighting"]
 	path = zsh/plugins/fast-syntax-highlighting
 	url = git@github.com:zdharma/fast-syntax-highlighting.git
-[submodule "zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"]
-	path = zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-	url = git@github.com:zsh-users/zsh-autosuggestions.git
 [submodule "zsh/plugins/zsh-autosuggestions"]
 	path = zsh/plugins/zsh-autosuggestions
 	url = git@github.com:zsh-users/zsh-autosuggestions.git
 [submodule "zsh/plugins/zsh-history-substring-search"]
 	path = zsh/plugins/zsh-history-substring-search
 	url = git@github.com:zsh-users/zsh-history-substring-search.git
-[submodule "config/nvim/pack/minpac/opt/minpac"]
-	path = config/nvim/pack/minpac/opt/minpac
-	url = git@github.com:k-takata/minpac.git
 [submodule "zsh/plugins/zsh-autoenv"]
 	path = zsh/plugins/zsh-autoenv
 	url = git@github.com:Tarrasch/zsh-autoenv.git
