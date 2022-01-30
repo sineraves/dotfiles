@@ -12,9 +12,22 @@ local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup {
   debug = false,
+  -- format on save
+  on_attach = function(client)
+    if client.resolved_capabilities.document_formatting then
+      vim.cmd([[
+            augroup LspFormatting
+            autocmd! * <buffer>
+            autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+            augroup END
+            ]])
+    end
+  end,
   sources = {
     diagnostics.credo,
-    diagnostics.eslint,
+    diagnostics.eslint.with({
+      prefer_local = "node_modules/.bin"
+    }),
     diagnostics.flake8,
     diagnostics.rubocop.with({
       command = "bundle",
