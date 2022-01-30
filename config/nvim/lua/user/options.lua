@@ -12,14 +12,14 @@ opt.fileencoding = "utf-8"
 opt.formatoptions:append({ c = false, r = false, o = false }) -- ignored, overridden later maybe?
 opt.hlsearch = true
 opt.ignorecase = true
-opt.iskeyword:append "-"
+opt.iskeyword:append("-")
 opt.number = true
 opt.numberwidth = 4
 opt.pumheight = 10
 opt.relativenumber = false
 opt.scrolloff = 8
 opt.shiftwidth = 2
-opt.shortmess:append "c"
+opt.shortmess:append("c")
 opt.showmode = false
 opt.showtabline = 0
 opt.sidescrolloff = 8
@@ -38,4 +38,4 @@ opt.updatetime = 300
 opt.wrap = false
 opt.writebackup = false
 
-vim.cmd "set whichwrap+=<,>,[,],h,l"
+vim.cmd("set whichwrap+=<,>,[,],h,l")

@@ -10,7 +10,7 @@ end
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 
-null_ls.setup {
+null_ls.setup({
   debug = false,
   -- format on save
   on_attach = function(client)
@@ -26,12 +26,12 @@ null_ls.setup {
   sources = {
     diagnostics.credo,
     diagnostics.eslint.with({
-      prefer_local = "node_modules/.bin"
+      prefer_local = "node_modules/.bin",
     }),
     diagnostics.flake8,
     diagnostics.rubocop.with({
       command = "bundle",
-      args = vim.list_extend({ "exec", "rubocop" }, diagnostics.rubocop._opts.args)
+      args = vim.list_extend({ "exec", "rubocop" }, diagnostics.rubocop._opts.args),
     }),
     formatting.black,
     formatting.djhtml,
@@ -42,9 +42,9 @@ null_ls.setup {
     }),
     formatting.rubocop.with({
       command = "bundle",
-      args = vim.list_extend({ "exec", "rubocop" }, formatting.rubocop._opts.args)
+      args = vim.list_extend({ "exec", "rubocop" }, formatting.rubocop._opts.args),
     }),
     formatting.rustfmt,
     formatting.stylua,
   },
-}
+})

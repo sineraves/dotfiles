@@ -1,10 +1,10 @@
 local status_ok, indent_blankline = pcall(require, "indent_blankline")
 if not status_ok then
-	return
+  return
 end
 
 indent_blankline.setup({
-	-- show_end_of_line = true,
+  -- show_end_of_line = true,
   blankline_char = "▏",
   buftype_exclude = { "terminal", "nofile" },
   char = "▏",
@@ -36,7 +36,7 @@ indent_blankline.setup({
     "neogitstatus",
     "NvimTree",
   },
-	show_current_context = true,
+  show_current_context = true,
   show_trailing_blankline_indent = false,
   use_treesitter = true,
 })

@@ -1,17 +1,17 @@
-require "user.options"
-require "user.keymaps"
-require "user.plugins"
-require "user.colorscheme"
-require "user.lsp"
+require("user.options")
+require("user.keymaps")
+require("user.plugins")
+require("user.colorscheme")
+require("user.lsp")
 
-require "user.plugins.cmp"
-require "user.plugins.telescope"
-require "user.plugins.treesitter"
-require "user.plugins.autopairs"
-require "user.plugins.comment"
-require "user.plugins.gitsigns"
-require "user.plugins.nvim-tree"
-require "user.plugins.lualine"
-require "user.plugins.toggleterm"
-require "user.plugins.indentline"
-require "user.plugins.whichkey"
+require("user.plugins.cmp")
+require("user.plugins.telescope")
+require("user.plugins.treesitter")
+require("user.plugins.autopairs")
+require("user.plugins.comment")
+require("user.plugins.gitsigns")
+require("user.plugins.nvim-tree")
+require("user.plugins.lualine")
+require("user.plugins.toggleterm")
+require("user.plugins.indentline")
+require("user.plugins.whichkey")

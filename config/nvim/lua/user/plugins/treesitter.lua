@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-configs.setup {
+configs.setup({
   ensure_installed = "maintained",
   sync_install = false,
   -- norg fails to compile on macOS Monterey as of 29/01/2022
@@ -26,5 +26,5 @@ configs.setup {
   context_commentstring = {
     enable = true,
     enable_autocmd = false,
-  }
-}
+  },
+})
