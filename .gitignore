@@ -1,3 +1,3 @@
 .DS_Store
-config/nvim/pack/minpac/start/
 zsh/cache/
+config/nvim/plugin/packer_compiled.lua
