@@ -10,20 +10,12 @@ brew install \
   exa \
   fd \
   fzf \
-  gpg \
-  python \
-  reattach-to-user-namespace \
   ripgrep \
   tmux \
   tree
-brew tap heroku/brew && \
-  brew install heroku
-brew tap universal-ctags/universal-ctags && \
-  brew install --HEAD universal-ctags
+brew tap heroku/brew && brew install heroku
 
 echo "Adding asdf plugins"
 asdf plugin-add ruby
+asdf plugin-add python
 asdf plugin-add nodejs
-
-echo "Importing the Node.js release team's OpenPGP keys to main keyring"
-bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
