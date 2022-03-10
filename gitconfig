@@ -1,24 +1,5 @@
-[color]
-  diff = auto
-  status = auto
-  branch = auto
-  interactive = auto
-  ui = auto
-
 [core]
   excludesfile = ~/.gitignore
-
-[pull]
-  rebase = true
-
-[push]
-  default = current
-
-[apply]
-  whitespace = nowarn
-
-[branch]
-  autosetupmerge = true
 
 [mergetool]
   keepBackup = false
@@ -30,13 +11,5 @@
 [include]
   path = ~/.gitconfig.user
 
-[filter "lfs"]
-  required = true
-  process = git-lfs filter-process
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-
-[gpg]
-  program = /usr/local/bin/gpg
 [init]
-	defaultBranch = main
+  defaultBranch = main
