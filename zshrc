@@ -23,7 +23,7 @@ source ~/.zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.z
 [ -f ~/.config/cani/completions/_cani.zsh ] && source ~/.config/cani/completions/_cani.zsh
 
 # https://github.com/asdf-vm/asdf
-[ -f /usr/local/opt/asdf/asdf.sh ] && source /usr/local/opt/asdf/asdf.sh
+[ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ] && source /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # https://cloud.google.com/sdk - PATH
 [ -f ~/_/tools/google-cloud-sdk/path.zsh.inc ] && source ~/_/tools/google-cloud-sdk/path.zsh.inc
