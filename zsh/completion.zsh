@@ -1,6 +1,6 @@
 # Add any homebrew completions
 if type brew &>/dev/null; then
-  fpath=(/usr/local/share/zsh/site-functions $fpath)
+  fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 fi
 
 fpath=(~/.zsh/completion $fpath)
