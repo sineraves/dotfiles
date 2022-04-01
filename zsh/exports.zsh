@@ -1,6 +1,7 @@
 export CLICOLOR=1
 export EDITOR=nvim
 export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git' -g '!.keep'"
+export GPG_TTY=$(tty)
 export LC_COLLATE=C
 export TERM=screen-256color
 export VISUAL=nvim

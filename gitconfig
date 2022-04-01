@@ -1,15 +1,21 @@
+[commit]
+	gpgsign = true
+
 [core]
   excludesfile = ~/.gitignore
 
-[mergetool]
-  keepBackup = false
-  prompt = false
-
 [difftool]
   prompt = false
+
+[gpg]
+	program = /opt/homebrew/bin/gpg
 
 [include]
   path = ~/.gitconfig.user
 
 [init]
   defaultBranch = main
+
+[mergetool]
+  keepBackup = false
+  prompt = false
