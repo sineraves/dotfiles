@@ -1,3 +1,6 @@
+path=("/Users/matt/.bin" $path)
+export PATH
+
 export CLICOLOR=1
 export EDITOR=nvim
 export FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git' -g '!.keep'"
