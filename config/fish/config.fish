@@ -2,7 +2,7 @@ fish_add_path /opt/homebrew/bin
 fish_add_path ~/.local/bin
 fish_add_path -a bin
 
-set -gx TERM xterm-256color
+set -gx TERM screen-256color
 set -gx EDITOR nvim           # neovim
 set -gx VISUAL nvim           # ... for everything
 set -gx GPG_TTY (tty)         # required for signing git commits with gpg key
@@ -18,6 +18,10 @@ end
 alias be "bundle exec"
 alias dc "docker compose"
 alias g git
+alias gd "git diff"
+alias gdc "git diff --cached"
+alias gl "git log --decorate --oneline"
+alias gs "git status --short"
 alias myip "dig +short myip.opendns.com @resolver1.opendns.com"
 alias mux tmuxinator
 
