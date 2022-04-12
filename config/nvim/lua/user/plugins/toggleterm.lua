@@ -58,3 +58,13 @@ local python = Terminal:new({ cmd = "python", hidden = true })
 function _PYTHON_TOGGLE()
   python:toggle()
 end
+
+local ruby = Terminal:new({ cmd = "irb", hidden = true })
+function _RUBY_TOGGLE()
+  ruby:toggle()
+end
+
+local rails = Terminal:new({ cmd = "bundle exec rails c", hidden = true })
+function _RAILS_TOGGLE()
+  rails:toggle()
+end
