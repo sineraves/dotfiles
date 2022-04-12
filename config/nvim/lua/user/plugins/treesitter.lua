@@ -4,7 +4,37 @@ if not status_ok then
 end
 
 configs.setup({
-  ensure_installed = "maintained",
+  ensure_installed = {
+    "bash",
+    "c",
+    "c_sharp",
+    "css",
+    "dart",
+    "dockerfile",
+    "eex",
+    "elixir",
+    "erlang",
+    "fish",
+    "go",
+    "graphql",
+    "heex",
+    "json",
+    "json5",
+    "jsonc",
+    "kotlin",
+    "lua",
+    "make",
+    "prisma",
+    "ruby",
+    "rust",
+    "scss",
+    "supercollider",
+    "svelte",
+    "tsx",
+    "typescript",
+    "vim",
+    "yaml"
+  },
   sync_install = false,
   -- norg fails to compile on macOS Monterey as of 29/01/2022
   ignore_install = { "norg" },
