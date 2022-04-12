@@ -12,6 +12,8 @@ npairs.setup({
   },
   disable_filetype = { "TelescopePrompt" },
 })
+npairs.add_rules(require("nvim-autopairs.rules.endwise-ruby"))
+npairs.add_rules(require("nvim-autopairs.rules.endwise-elixir"))
 
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local cmp_status_ok, cmp = pcall(require, "cmp")
