@@ -1,3 +1,10 @@
 .DS_Store
 zsh/cache/
 config/nvim/plugin/packer_compiled.lua
+
+config/fish/fish_variables
+
+# These directories are mainly managed by fisher
+config/fish/completions/*
+config/fish/conf.d/*
+config/fish/functions/*
