@@ -1,7 +1,6 @@
 local opt = vim.opt
 
 opt.backup = false
-opt.clipboard = "unnamedplus"
 opt.cmdheight = 2
 opt.colorcolumn = "+1"
 opt.completeopt = { "menuone", "noselect" }
