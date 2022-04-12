@@ -8,3 +8,6 @@ config/fish/fish_variables
 config/fish/completions/*
 config/fish/conf.d/*
 config/fish/functions/*
+
+tmux/plugins/*
+!tmux/plugins/tpm
