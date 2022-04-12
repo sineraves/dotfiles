@@ -54,10 +54,10 @@ return packer.startup(function(use)
   })
   use("lukas-reineke/indent-blankline.nvim")
   use("folke/which-key.nvim")
-  use { 'echasnovski/mini.nvim', branch = 'stable' }
+  use({ "echasnovski/mini.nvim", branch = "stable" })
 
   -- colorscheme
-  use("~/_/tools/dracula_pro/themes/vim")
+  use({ "dracula/vim", as = "dracula" })
 
   -- completion
   use("hrsh7th/nvim-cmp")
