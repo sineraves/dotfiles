@@ -1,15 +1,3 @@
-[submodule "zsh/plugins/fast-syntax-highlighting"]
-	path = zsh/plugins/fast-syntax-highlighting
-	url = git@github.com:zdharma-continuum/fast-syntax-highlighting.git
-[submodule "zsh/plugins/zsh-autosuggestions"]
-	path = zsh/plugins/zsh-autosuggestions
-	url = git@github.com:zsh-users/zsh-autosuggestions.git
-[submodule "zsh/plugins/zsh-history-substring-search"]
-	path = zsh/plugins/zsh-history-substring-search
-	url = git@github.com:zsh-users/zsh-history-substring-search.git
-[submodule "zsh/plugins/zsh-autoenv"]
-	path = zsh/plugins/zsh-autoenv
-	url = git@github.com:Tarrasch/zsh-autoenv.git
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
