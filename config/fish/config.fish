@@ -7,6 +7,10 @@ set -gx EDITOR nvim           # neovim
 set -gx VISUAL nvim           # ... for everything
 set -gx GPG_TTY (tty)         # required for signing git commits with gpg key
 
+if type -q bat
+  set -gx PAGER bat
+end
+
 # Decide bat theme from iterm profile name
 # https://github.com/sharkdp/bat
 if test "$ITERM_PROFILE" = "dark"
