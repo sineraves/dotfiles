@@ -4,18 +4,21 @@ echo "Installing homebrew"
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 echo "Installing homebrew packages"
-brew install \
-  asdf \
-  bat \
-  exa \
-  fd \
-  fzf \
-  ripgrep \
-  tmux \
-  tree
-brew tap heroku/brew && brew install heroku
+brew install asdf     # Extensible version manager
+brew install bat      # `cat` clone with syntax highlighting, git
+brew install bottom   # Process/system monitor (`btm`)
+brew install exa      # Better `ls`
+brew install fd       # User-friendly `find`
+brew install fish     # A shell for the 90s
+brew install gh       # GitHub niceties
+brew install neovim   # Text editor
+brew install ripgrep  # Search
+brew install sd       # Friendlier `sed`
+brew install stylua   # Lint and format lua neovim config
+brew install tmux     # Let's go the multiplex
 
 echo "Adding asdf plugins"
-asdf plugin-add ruby
-asdf plugin-add python
 asdf plugin-add nodejs
+asdf plugin-add postgres
+asdf plugin-add python
+asdf plugin-add ruby
