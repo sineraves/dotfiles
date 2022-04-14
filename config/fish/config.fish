@@ -33,7 +33,7 @@ abbr -U mux tmuxinator
 # Modern replacement for `ls`
 if type -q exa
   abbr -U ll exa -l -g --icons
-  abbr -U lla ll -a
+  abbr -U lla exa -l -g --icons -a
 end
 
 # ASDF version manager, installed with Homebrew
