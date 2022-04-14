@@ -49,9 +49,9 @@ function _NODE_TOGGLE()
   node:toggle()
 end
 
-local htop = Terminal:new({ cmd = "htop", hidden = true })
-function _HTOP_TOGGLE()
-  htop:toggle()
+local btm = Terminal:new({ cmd = "btm", hidden = true })
+function _BTM_TOGGLE()
+  btm:toggle()
 end
 
 local python = Terminal:new({ cmd = "python", hidden = true })
