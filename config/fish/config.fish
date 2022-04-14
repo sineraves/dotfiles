@@ -19,21 +19,21 @@ else if test "$ITERM_PROFILE" = "light"
   set -gx BAT_THEME "Monokai Extended Light"
 end
 
-alias be "bundle exec"
-alias dc "docker compose"
-alias g git
-alias gd "git diff"
-alias gdc "git diff --cached"
-alias gl "git log --decorate --oneline"
-alias gs "git status --short"
-alias myip "dig +short myip.opendns.com @resolver1.opendns.com"
-alias mux tmuxinator
+abbr -U be bundle exec
+abbr -U dc docker compose
+abbr -U g git
+abbr -U gd git diff
+abbr -U gdc git diff --cached
+abbr -U gl git log --decorate --oneline
+abbr -U gs git status --short
+abbr -U myip dig +short myip.opendns.com @resolver1.opendns.com
+abbr -U mux tmuxinator
 
 # https://the.exa.website
 # Modern replacement for `ls`
 if type -q exa
-  alias ll "exa -l -g --icons"
-  alias lla "ll -a"
+  abbr -U ll exa -l -g --icons
+  abbr -U lla ll -a
 end
 
 # ASDF version manager, installed with Homebrew
