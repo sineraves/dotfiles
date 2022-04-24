@@ -91,6 +91,7 @@ return packer.startup(function(use)
 
   -- Legacy (VimScript) plugins
   -- TODO: Find lua alternatives or remove altogether
+  use("AndrewRadev/splitjoin.vim")
   use("editorconfig/editorconfig-vim")
   use("machakann/vim-sandwich")
 
