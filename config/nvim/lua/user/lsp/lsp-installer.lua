@@ -14,6 +14,20 @@ lsp_installer.on_server_ready(function(server)
     opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
   end
 
+  if server.name == "solargraph" then
+    local solargraph_opts = {}
+
+    solargraph_env = os.getenv("NVIM_SOLARGRAPH")
+
+    if solargraph_env == "docker" then
+      solargraph_opts.cmd = { "docker", "compose", "exec", "-T", "app", "solargraph", "stdio" }
+    else
+      solargraph_opts.cmd = { "bundle", "exec", "solargraph", "stdio" }
+    end
+
+    opts = vim.tbl_deep_extend("force", solargraph_opts, opts)
+  end
+
   if server.name == "sumneko_lua" then
     local sumneko_opts = require("user.lsp.settings.sumneko_lua")
     opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
