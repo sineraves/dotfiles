@@ -1,11 +1,15 @@
 fish_add_path /opt/homebrew/bin
 fish_add_path ~/.local/bin
+fish_add_path ~/.cargo/bin
 fish_add_path -a bin
 
 set -gx TERM screen-256color
 set -gx EDITOR nvim           # neovim
 set -gx VISUAL nvim           # ... for everything
 set -gx GPG_TTY (tty)         # required for signing git commits with gpg key
+
+set -gx PNPM_HOME "/Users/matt/Library/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
 
 if type -q bat
   set -gx PAGER bat
@@ -20,7 +24,11 @@ else if test "$ITERM_PROFILE" = "light"
 end
 
 abbr -U be bundle exec
+
 abbr -U dc docker compose
+abbr -U dce docker compose exec
+abbr -U dcr docker compose run
+
 abbr -U g git
 abbr -U gd git diff
 abbr -U gdc git diff --cached
