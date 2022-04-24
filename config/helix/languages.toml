@@ -1,4 +1,0 @@
-[[language]]
-name = "ruby"
-auto-format = true
-file-types = ["Gemfile"]
