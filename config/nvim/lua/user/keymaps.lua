@@ -20,6 +20,11 @@ km("n", "<C-Right>", ":vertical resize +2<cr>", opts)
 km("n", "<S-l>", ":bnext<cr>", opts)
 km("n", "<S-h>", ":bprevious<cr>", opts)
 
+-- Add blank line above or below
+-- TODO: stay on line when adding multiple lines
+km("n", "[<Space>", "O<Esc>j", opts)
+km("n", "]<Space>", "o<Esc>k", opts)
+
 -- INSERT
 
 km("i", "jk", "<Esc>", opts)
@@ -33,6 +38,7 @@ km("v", ">", ">gv", opts)
 -- Move selected text up and down like in VSCode
 km("v", "<A-j>", ":m .+1<CR>==", opts)
 km("v", "<A-k>", ":m .-2<CR>==", opts)
+
 -- Don't yank what is being pasted over
 km("v", "p", '"_dP', opts)
 
