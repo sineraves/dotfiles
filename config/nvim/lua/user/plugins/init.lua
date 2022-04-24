@@ -54,7 +54,6 @@ return packer.startup(function(use)
   })
   use("lukas-reineke/indent-blankline.nvim")
   use("folke/which-key.nvim")
-  use({ "echasnovski/mini.nvim", branch = "stable" })
 
   -- colorscheme
   use({ "dracula/vim", as = "dracula" })
@@ -94,6 +93,7 @@ return packer.startup(function(use)
   -- Legacy (VimScript) plugins
   -- TODO: Find lua alternatives or remove altogether
   use("editorconfig/editorconfig-vim")
+  use("machakann/vim-sandwich")
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
