@@ -54,6 +54,14 @@ return packer.startup(function(use)
   use("lukas-reineke/indent-blankline.nvim")
   use("folke/which-key.nvim")
 
+  use({
+    'kyazdani42/nvim-tree.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('user.plugins.nvim-tree')
+    end,
+  })
+
   -- colorscheme
   use 'ful1e5/onedark.nvim'
 
