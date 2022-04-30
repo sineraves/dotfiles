@@ -55,7 +55,7 @@ return packer.startup(function(use)
   use("folke/which-key.nvim")
 
   -- colorscheme
-  use({ "dracula/vim", as = "dracula" })
+  use 'ful1e5/onedark.nvim'
 
   -- completion
   use("hrsh7th/nvim-cmp")
