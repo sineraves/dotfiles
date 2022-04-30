@@ -1,4 +1,6 @@
 fish_add_path /opt/homebrew/bin
+fish_add_path /opt/homebrew/opt/openssl@1.1/bin
+fish_add_path /opt/homebrew/opt/postgresql@13/bin
 fish_add_path ~/.local/bin
 fish_add_path ~/.cargo/bin
 fish_add_path -a bin
@@ -7,6 +9,16 @@ set -gx TERM screen-256color
 set -gx EDITOR nvim           # neovim
 set -gx VISUAL nvim           # ... for everything
 set -gx GPG_TTY (tty)         # required for signing git commits with gpg key
+
+set -gx LDFLAGS "-L/opt/homebrew/opt/openssl@1.1/lib"
+set -gx CPPFLAGS "-I/opt/homebrew/opt/openssl@1.1/include"
+
+# For compilers to find postgresql@13 you may need to set:
+set -gx LDFLAGS "-L/opt/homebrew/opt/postgresql@13/lib"
+set -gx CPPFLAGS "-I/opt/homebrew/opt/postgresql@13/include"
+
+# For pkg-config to find postgresql@13 you may need to set:
+set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/postgresql@13/lib/pkgconfig"
 
 set -gx PNPM_HOME "/Users/matt/Library/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
@@ -46,3 +58,5 @@ end
 
 # ASDF version manager, installed with Homebrew
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
+
+status --is-interactive; and rbenv init - fish | source
