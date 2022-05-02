@@ -1,4 +1,4 @@
-require("user.lsp.handlers")
+require("lsp.handlers")
 
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local lsp_format = require("lsp-format")
@@ -32,6 +32,15 @@ lsp_format.setup({})
 
 -- Default `capabilities` and `on_attach` to pass to lsp setup functions
 local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- From https://github.com/hrsh7th/nvim-compe#how-to-use-lsp-snippet
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- capabilities.textDocument.completion.completionItem.resolveSupport = {
+--   properties = {
+--     "documentation",
+--     "detail",
+--     "additionalTextEdits",
+--   },
+-- }
 local on_attach = function(client)
   lsp_format.on_attach(client)
 end
@@ -39,7 +48,7 @@ end
 lspconfig.jsonls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
-  settings = require("user.lsp.settings.jsonls"),
+  settings = require("lsp.settings.jsonls"),
 })
 
 lspconfig.solargraph.setup({
@@ -62,7 +71,7 @@ lspconfig.sumneko_lua.setup({
     client.resolved_capabilities.document_range_formatting = false
     on_attach(client)
   end,
-  settings = require("user.lsp.settings.sumneko_lua"),
+  settings = require("lsp.settings.sumneko_lua"),
 })
 
 lspconfig.tsserver.setup({

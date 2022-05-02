@@ -37,8 +37,6 @@ packer.init({
 
 return packer.startup(function(use)
   use("wbthomason/packer.nvim") -- yo dawg
-  use("nvim-lua/popup.nvim")
-  use("nvim-lua/plenary.nvim")
   use("windwp/nvim-autopairs")
   use("numToStr/Comment.nvim")
   use("kyazdani42/nvim-web-devicons")
@@ -58,9 +56,21 @@ return packer.startup(function(use)
     "kyazdani42/nvim-tree.lua",
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
-      require("user.plugins.nvim-tree")
+      require("plugins.nvim-tree")
     end,
   })
+
+  use("AndrewRadev/splitjoin.vim")
+  use("editorconfig/editorconfig-vim")
+  use("machakann/vim-sandwich")
+
+  -- Tests
+  -- vim-ultest is not all that useful for rspec atm, as it makes separate runs
+  -- for each spec in a file.
+  -- TODO: look into writing an output parser for rspec to enable running files
+  -- in a single process.
+  -- Can still use `vim-test` commands in the meantime.
+  use({ "rcarriga/vim-ultest", requires = { "janko/vim-test" }, run = ":UpdateRemotePlugins" })
 
   -- colorscheme
   use("ful1e5/onedark.nvim")
@@ -79,7 +89,10 @@ return packer.startup(function(use)
   use("rafamadriz/friendly-snippets")
 
   -- LSP
-  use("jose-elias-alvarez/null-ls.nvim")
+  use({
+    "jose-elias-alvarez/null-ls.nvim",
+    requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  })
   use("lukas-reineke/lsp-format.nvim")
   use("neovim/nvim-lspconfig")
   use("onsails/lspkind.nvim")
@@ -87,7 +100,10 @@ return packer.startup(function(use)
   use("williamboman/nvim-lsp-installer")
 
   -- Telesope
-  use("nvim-telescope/telescope.nvim")
+  use({ "nvim-telescope/telescope.nvim", requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } } })
+  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+  use("ahmedkhalf/project.nvim")
+  use({ "mrjones2014/dash.nvim", requires = { "nvim-telescope/telescope.nvim" }, run = "make install" })
 
   -- Treesitter
   use({
@@ -97,14 +113,10 @@ return packer.startup(function(use)
   use("p00f/nvim-ts-rainbow")
   use("JoosepAlviste/nvim-ts-context-commentstring")
 
-  -- Git
-  use("lewis6991/gitsigns.nvim")
+  use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" })
 
-  -- Legacy (VimScript) plugins
-  -- TODO: Find lua alternatives or remove altogether
-  use("AndrewRadev/splitjoin.vim")
-  use("editorconfig/editorconfig-vim")
-  use("machakann/vim-sandwich")
+  -- Git
+  use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()

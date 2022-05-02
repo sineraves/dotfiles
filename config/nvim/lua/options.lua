@@ -37,4 +37,29 @@ opt.updatetime = 300
 opt.wrap = false
 opt.writebackup = false
 
+vim.g.loaded_perl_provider = 0
+vim.g.python3_host_prog = "~/.asdf/shims/python3"
+
+vim.g.floating_window_border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+vim.g.floating_window_border_dark = {
+  { "╭", "FloatBorderDark" },
+  { "─", "FloatBorderDark" },
+  { "╮", "FloatBorderDark" },
+  { "│", "FloatBorderDark" },
+  { "╯", "FloatBorderDark" },
+  { "─", "FloatBorderDark" },
+  { "╰", "FloatBorderDark" },
+  { "│", "FloatBorderDark" },
+}
+
+vim.diagnostic.config({
+  virtual_text = {
+    spacing = 3,
+    prefix = " ",
+    severity_sort = true,
+    source = "if_many",
+  },
+})
+
 vim.cmd("set whichwrap+=<,>,[,],h,l")
+vim.cmd("let test#strategy = 'neovim'")
