@@ -96,7 +96,6 @@ return packer.startup(function(use)
   use("lukas-reineke/lsp-format.nvim")
   use("neovim/nvim-lspconfig")
   use("onsails/lspkind.nvim")
-  use("ray-x/lsp_signature.nvim")
   use("williamboman/nvim-lsp-installer")
 
   -- Telesope
