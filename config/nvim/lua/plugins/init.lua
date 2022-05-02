@@ -99,10 +99,19 @@ return packer.startup(function(use)
   use("onsails/lspkind.nvim")
   use("williamboman/nvim-lsp-installer")
 
-  -- Telesope
+  -- Telescope
   use({ "nvim-telescope/telescope.nvim", requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } } })
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-  use("ahmedkhalf/project.nvim")
+  use({
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup({
+        manual_mode = false,
+        detection_methods = { "lsp", "pattern" },
+        patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+      })
+    end,
+  })
   use({ "mrjones2014/dash.nvim", requires = { "nvim-telescope/telescope.nvim" }, run = "make install" })
 
   -- Treesitter

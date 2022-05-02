@@ -83,3 +83,4 @@ telescope.setup({
   },
   extensions = {},
 })
+telescope.load_extension("projects")
