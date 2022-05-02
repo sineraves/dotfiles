@@ -17,34 +17,6 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local kind_icons = {
-  Class = "",
-  Color = "",
-  Constant = "",
-  Constructor = "",
-  Enum = "",
-  EnumMember = "",
-  Event = "",
-  Field = "",
-  File = "",
-  Folder = "",
-  Function = "",
-  Interface = "",
-  Keyword = "",
-  Method = "m",
-  Module = "",
-  Operator = "",
-  Property = "",
-  Reference = "",
-  Snippet = "",
-  Struct = "",
-  Text = "",
-  TypeParameter = "",
-  Unit = "",
-  Value = "",
-  Variable = "",
-}
-
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -87,9 +59,11 @@ cmp.setup({
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      -- Kind icons
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+    format = require("lspkind").cmp_format {
+      mode = "symbol",
+      maxwidth = 50,
+    },
+    before = function(entry, vim_item)
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
         nvim_lua = "[NVIM_LUA]",
@@ -97,6 +71,7 @@ cmp.setup({
         buffer = "[Buffer]",
         path = "[Path]",
       })[entry.source.name]
+
       return vim_item
     end,
   },
@@ -112,7 +87,12 @@ cmp.setup({
     select = false,
   },
   window = {
-    documentation = cmp.config.window.bordered(),
+    documentation = {
+      border = vim.g.floating_window_border_dark,
+    },
+    completion = {
+      border = vim.g.floating_window_border_dark,
+    },
   },
   view = {
     entries = "native",
