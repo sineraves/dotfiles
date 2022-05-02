@@ -30,7 +30,7 @@ abbr -U dcr docker compose run
 abbr -U g git
 abbr -U gd git diff
 abbr -U gdc git diff --cached
-abbr -U gl git log --decorate --oneline
+abbr -U gl "git log --pretty='%C(yellow)%h %C(cyan)%cd %Cblue%aN%C(auto)%d %s' --date=short --date-order"
 abbr -U gs git status --short
 abbr -U myip dig +short myip.opendns.com @resolver1.opendns.com
 abbr -U mux tmuxinator
