@@ -3,6 +3,7 @@ require("keymaps")
 require("plugins")
 require("colorscheme")
 require("lsp")
+require("autocommands")
 
 require("plugins.cmp")
 require("plugins.telescope")

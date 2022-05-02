@@ -16,16 +16,6 @@ lsp_installer.setup({
   },
 })
 
--- As of 01/05/2022 lspconfig renders the window for :LspInfo without borders;
--- (lsp-installer makes use of this setting too).
--- This autocmd adds borders so it doesn't look weird
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "lspinfo,lsp-installer",
-  callback = function()
-    vim.api.nvim_win_set_config(0, { border = vim.g.floating_window_border_dark })
-  end,
-})
-
 -- lsp-format takes care of "format on save" hooks
 -- actual formatting is provided by relevant lsps
 lsp_format.setup({})
