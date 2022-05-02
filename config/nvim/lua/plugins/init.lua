@@ -122,7 +122,13 @@ return packer.startup(function(use)
   use("p00f/nvim-ts-rainbow")
   use("JoosepAlviste/nvim-ts-context-commentstring")
 
-  use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" })
+  use({
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup({ auto_preview = false })
+    end,
+  })
 
   -- Git
   use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
