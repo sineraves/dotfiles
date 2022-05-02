@@ -59,21 +59,21 @@ cmp.setup({
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },
-    format = require("lspkind").cmp_format {
+    format = require("lspkind").cmp_format({
       mode = "symbol",
       maxwidth = 50,
-    },
-    before = function(entry, vim_item)
-      vim_item.menu = ({
-        nvim_lsp = "[LSP]",
-        nvim_lua = "[NVIM_LUA]",
-        luasnip = "[Snippet]",
-        buffer = "[Buffer]",
-        path = "[Path]",
-      })[entry.source.name]
+      before = function(entry, vim_item)
+        vim_item.menu = ({
+          nvim_lsp = "[LSP]",
+          nvim_lua = "[NVIM_LUA]",
+          luasnip = "[Snippet]",
+          buffer = "[Buffer]",
+          path = "[Path]",
+        })[entry.source.name]
 
-      return vim_item
-    end,
+        return vim_item
+      end,
+    }),
   },
   sources = {
     { name = "nvim_lsp" },
