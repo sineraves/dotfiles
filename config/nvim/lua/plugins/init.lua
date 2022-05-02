@@ -51,6 +51,7 @@ return packer.startup(function(use)
   })
   use("lukas-reineke/indent-blankline.nvim")
   use("folke/which-key.nvim")
+  use("kosayoda/nvim-lightbulb")
 
   use({
     "kyazdani42/nvim-tree.lua",

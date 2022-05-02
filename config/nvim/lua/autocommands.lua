@@ -12,6 +12,13 @@ autocmd("FileType", {
     vim.api.nvim_win_set_config(0, { border = vim.g.floating_window_border_dark })
   end,
 })
+autocmd({ "CursorHold", "CursorHoldI" }, {
+  group = "USER_LSP",
+  pattern = "*",
+  callback = function()
+    require("nvim-lightbulb").update_lightbulb()
+  end,
+})
 
 augroup("USER_TERMINAL", { clear = true })
 autocmd("TermOpen", {
