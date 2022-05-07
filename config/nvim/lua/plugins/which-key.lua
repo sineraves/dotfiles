@@ -157,6 +157,14 @@ local mappings = {
   },
 
   t = {
+    name = "Tests",
+    n = { "<cmd>TestNearest<cr>", "Nearest" },
+    f = { "<cmd>TestFile<cr>", "File" },
+    l = { "<cmd>TestLast<cr>", "Last" },
+    o = { "<cmd>TestVisit<cr>", "Open last" },
+  },
+
+  T = {
     name = "Terminal",
     n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
     b = { "<cmd>lua _BTM_TOGGLE()<cr>", "BTM" },

@@ -66,12 +66,7 @@ return packer.startup(function(use)
   use("machakann/vim-sandwich")
 
   -- Tests
-  -- vim-ultest is not all that useful for rspec atm, as it makes separate runs
-  -- for each spec in a file.
-  -- TODO: look into writing an output parser for rspec to enable running files
-  -- in a single process.
-  -- Can still use `vim-test` commands in the meantime.
-  use({ "rcarriga/vim-ultest", requires = { "janko/vim-test" }, run = ":UpdateRemotePlugins" })
+  use("janko/vim-test")
 
   -- colorscheme
   use("ful1e5/onedark.nvim")
