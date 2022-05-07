@@ -1,5 +1,19 @@
-local opt = vim.opt
+local g = vim.g -- global editor variables
+local opt = vim.opt -- vim options
 
+g.floating_window_border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+g.floating_window_border_dark = {
+  { "╭", "FloatBorderDark" },
+  { "─", "FloatBorderDark" },
+  { "╮", "FloatBorderDark" },
+  { "│", "FloatBorderDark" },
+  { "╯", "FloatBorderDark" },
+  { "─", "FloatBorderDark" },
+  { "╰", "FloatBorderDark" },
+  { "│", "FloatBorderDark" },
+}
+g.loaded_perl_provider = 0
+g.python3_host_prog = "~/.asdf/shims/python3"
 opt.backup = false
 opt.cmdheight = 2
 opt.colorcolumn = "+1"
@@ -8,15 +22,14 @@ opt.conceallevel = 0
 opt.cursorline = true
 opt.expandtab = true
 opt.fileencoding = "utf-8"
-opt.formatoptions:append({ c = false, r = false, o = false }) -- ignored, overridden later maybe?
 opt.hlsearch = true
 opt.ignorecase = true
 opt.iskeyword:append("-")
 opt.number = true
 opt.numberwidth = 4
 opt.pumheight = 10
-opt.relativenumber = false
-opt.scrolloff = 8
+opt.relativenumber = true
+opt.scrolloff = 4
 opt.shiftwidth = 2
 opt.shortmess:append("c")
 opt.showmode = false
@@ -34,23 +47,9 @@ opt.textwidth = 80
 opt.timeoutlen = 500
 opt.undofile = true
 opt.updatetime = 300
+opt.whichwrap:append("<,>,[,],h,l")
 opt.wrap = false
 opt.writebackup = false
-
-vim.g.loaded_perl_provider = 0
-vim.g.python3_host_prog = "~/.asdf/shims/python3"
-
-vim.g.floating_window_border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
-vim.g.floating_window_border_dark = {
-  { "╭", "FloatBorderDark" },
-  { "─", "FloatBorderDark" },
-  { "╮", "FloatBorderDark" },
-  { "│", "FloatBorderDark" },
-  { "╯", "FloatBorderDark" },
-  { "─", "FloatBorderDark" },
-  { "╰", "FloatBorderDark" },
-  { "│", "FloatBorderDark" },
-}
 
 vim.diagnostic.config({
   virtual_text = {
@@ -60,6 +59,3 @@ vim.diagnostic.config({
     source = "if_many",
   },
 })
-
-vim.cmd("set whichwrap+=<,>,[,],h,l")
-vim.cmd("let test#strategy = 'neovim'")
