@@ -66,3 +66,8 @@ local rails = Terminal:new({ cmd = "bundle exec rails c", hidden = true })
 function _RAILS_TOGGLE()
   rails:toggle()
 end
+
+local elixir = Terminal:new({ cmd = "iex -S mix", hidden = true })
+function _ELIXIR_TOGGLE()
+  elixir:toggle()
+end
