@@ -1,38 +1,6 @@
-vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_group_empty = 1
-vim.g.nvim_tree_highlight_opened_files = 1
-vim.g.nvim_tree_icons = {
-   default = "",
-   symlink = "",
-   git = {
-     unstaged = "",
-     staged = "S",
-     unmerged = "",
-     renamed = "➜",
-     deleted = "",
-     untracked = "?",
-     ignored = "◌",
-   },
-   folder = {
-     default = "",
-     open = "",
-     empty = "",
-     empty_open = "",
-     symlink = "",
-   },
- }
-vim.g.nvim_tree_root_folder_modifier = ':t'
-vim.g.nvim_tree_show_icons = {
-  files = 1,
-  folder_arrows = 1,
-  folders = 1,
-  git = 1,
-}
-vim.g.nvim_tree_special_files = {}
+local tree_cb = require("nvim-tree.config").nvim_tree_callback
 
-local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-
-require('nvim-tree').setup({
+require("nvim-tree").setup({
   actions = {
     open_file = {
       resize_window = true,
@@ -51,6 +19,41 @@ require('nvim-tree').setup({
   hijack_directories = {
     enable = true,
     auto_open = true,
+  },
+  renderer = {
+    group_empty = true,
+    highlight_git = true,
+    highlight_opened_files = "icon",
+    icons = {
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = true,
+        git = true,
+      },
+      glyphs = {
+        default = "",
+        symlink = "",
+        git = {
+          unstaged = "",
+          staged = "S",
+          unmerged = "",
+          renamed = "➜",
+          deleted = "",
+          untracked = "?",
+          ignored = "◌",
+        },
+        folder = {
+          default = "",
+          open = "",
+          empty = "",
+          empty_open = "",
+          symlink = "",
+        },
+      },
+    },
+    root_folder_modifier = ":t",
+    special_files = {},
   },
   update_cwd = true,
   update_focused_file = {
