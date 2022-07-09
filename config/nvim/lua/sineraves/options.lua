@@ -1,6 +1,8 @@
 local g = vim.g -- global editor variables
 local opt = vim.opt -- vim options
 
+g.mapleader = " "
+g.localmapleader = " "
 g.floating_window_border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
 g.floating_window_border_dark = {
   { "╭", "FloatBorderDark" },
@@ -14,16 +16,17 @@ g.floating_window_border_dark = {
 }
 g.loaded_perl_provider = 0
 g.python3_host_prog = "~/.asdf/shims/python3"
+
 opt.backup = false
 opt.cmdheight = 2
 opt.colorcolumn = "+1"
 opt.completeopt = { "menuone", "noselect" }
-opt.conceallevel = 0
+-- opt.conceallevel = 0
 opt.cursorline = true
 opt.expandtab = true
 opt.fileencoding = "utf-8"
-opt.hlsearch = true
-opt.ignorecase = true
+opt.hlsearch = false
+opt.ignorecase = false
 opt.iskeyword:append("-")
 opt.number = true
 opt.numberwidth = 4
@@ -36,7 +39,7 @@ opt.showmode = false
 opt.showtabline = 0
 opt.sidescrolloff = 8
 opt.signcolumn = "yes"
-opt.smartcase = true
+opt.smartcase = false
 opt.smartindent = true
 opt.splitbelow = true
 opt.splitright = true

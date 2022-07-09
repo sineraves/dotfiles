@@ -12,19 +12,12 @@ autocmd("FileType", {
     vim.api.nvim_win_set_config(0, { border = vim.g.floating_window_border_dark })
   end,
 })
-autocmd({ "CursorHold", "CursorHoldI" }, {
-  group = "USER_LSP",
-  pattern = "*",
-  callback = function()
-    require("nvim-lightbulb").update_lightbulb()
-  end,
-})
 
-augroup("USER_TERMINAL", { clear = true })
-autocmd("TermOpen", {
-  group = "USER_TERMINAL",
-  pattern = "term://*",
+augroup("PACKER_USER_CONFIG", { clear = true })
+autocmd("BufWritePost", {
+  group = "PACKER_USER_CONFIG",
+  pattern = "packer.lua",
   callback = function()
-    set_terminal_keymaps()
+    vim.cmd([[source <afile> | PackerSync]])
   end,
 })

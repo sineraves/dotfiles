@@ -4,78 +4,27 @@ if not status_ok then
 end
 
 local actions = require("telescope.actions")
-local trouble = require("trouble.providers.telescope")
+local builtin = require("telescope.builtin")
+local previewers = require("telescope.previewers")
+local sorters = require("telescope.sorters")
 
 telescope.setup({
   defaults = {
+    color_devicons = true,
     dynamic_preview_title = true,
+    file_sorter = sorters.get_fzy_sorter,
+    prompt_prefix = " >",
     layout_strategy = "horizontal",
     path_display = { "smart" },
-    prompt_prefix = " ",
-    selection_caret = " ",
+
+    file_previewer = previewers.vim_buffer_cat.new,
+    grep_previewer = previewers.vim_buffer_vimgrep.new,
+    qflist_previewer = previewers.vim_buffer_qflist.new,
 
     mappings = {
       i = {
-        ["<C-n>"] = actions.cycle_history_next,
-        ["<C-p>"] = actions.cycle_history_prev,
-
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
-
-        ["<C-c>"] = actions.close,
-
-        ["<Down>"] = actions.move_selection_next,
-        ["<Up>"] = actions.move_selection_previous,
-
-        ["<CR>"] = actions.select_default,
-        ["<C-x>"] = actions.select_horizontal,
-        ["<C-v>"] = actions.select_vertical,
-        ["<c-t>"] = trouble.open_with_trouble,
-
-        ["<C-u>"] = actions.preview_scrolling_up,
-        ["<C-d>"] = actions.preview_scrolling_down,
-
-        ["<PageUp>"] = actions.results_scrolling_up,
-        ["<PageDown>"] = actions.results_scrolling_down,
-
-        ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-        ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-        ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-        ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-        ["<C-l>"] = actions.complete_tag,
-        ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
-      },
-
-      n = {
-        ["<esc>"] = actions.close,
-        ["<CR>"] = actions.select_default,
-        ["<C-x>"] = actions.select_horizontal,
-        ["<C-v>"] = actions.select_vertical,
-        ["<c-t>"] = trouble.open_with_trouble,
-
-        ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-        ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-        ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-        ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-
-        ["j"] = actions.move_selection_next,
-        ["k"] = actions.move_selection_previous,
-        ["H"] = actions.move_to_top,
-        ["M"] = actions.move_to_middle,
-        ["L"] = actions.move_to_bottom,
-
-        ["<Down>"] = actions.move_selection_next,
-        ["<Up>"] = actions.move_selection_previous,
-        ["gg"] = actions.move_to_top,
-        ["G"] = actions.move_to_bottom,
-
-        ["<C-u>"] = actions.preview_scrolling_up,
-        ["<C-d>"] = actions.preview_scrolling_down,
-
-        ["<PageUp>"] = actions.results_scrolling_up,
-        ["<PageDown>"] = actions.results_scrolling_down,
-
-        ["?"] = actions.which_key,
+        ["<C-x>"] = false,
+        ["<C-q>"] = actions.send_to_qflist,
       },
     },
   },
@@ -83,16 +32,26 @@ telescope.setup({
   pickers = {
     buffers = { theme = "dropdown", previewer = false },
   },
-
-  extensions = {
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case",
-    },
-  },
 })
 
-telescope.load_extension("fzf")
-telescope.load_extension("projects")
+local M = {}
+
+M.git_branches = function()
+  builtin.git_branches({
+    attach_mappings = function(_, map)
+      map("i", "<c-d>", actions.git_delete_branch)
+      map("n", "<c-d>", actions.git_delete_branch)
+      return true
+    end,
+  })
+end
+
+M.search_dotfiles = function()
+  builtin.find_files({
+    prompt_title = "< VimRC >",
+    cwd = "~/.dotfiles",
+    hidden = true,
+  })
+end
+
+return M
