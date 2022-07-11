@@ -34,6 +34,9 @@ telescope.setup({
   },
 })
 
+require("telescope").load_extension("file_browser")
+require("telescope").load_extension("ui-select")
+
 local M = {}
 
 M.git_branches = function()

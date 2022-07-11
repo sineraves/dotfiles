@@ -1,4 +1,4 @@
-require("lsp.handlers")
+require("sineraves.lsp.handlers")
 
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local lsp_format = require("lsp-format")
@@ -38,7 +38,7 @@ end
 lspconfig.jsonls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
-  settings = require("lsp.settings.jsonls"),
+  settings = require("sineraves.lsp.settings.jsonls"),
 })
 
 lspconfig.solargraph.setup({
@@ -61,7 +61,7 @@ lspconfig.sumneko_lua.setup({
     client.resolved_capabilities.document_range_formatting = false
     on_attach(client)
   end,
-  settings = require("lsp.settings.sumneko_lua"),
+  settings = require("sineraves.lsp.settings.sumneko_lua"),
 })
 
 lspconfig.tsserver.setup({

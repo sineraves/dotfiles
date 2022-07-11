@@ -29,3 +29,6 @@ xnoremap("K", ":move '<-2<CR>gv-gv")
 
 -- Don't yank what is being pasted over
 vnoremap("p", '"_dP')
+
+-- Temporary - testing out Rest.nvim
+nnoremap("<leader>R", "<Plug>RestNvim")

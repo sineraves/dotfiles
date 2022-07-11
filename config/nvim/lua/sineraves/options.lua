@@ -24,6 +24,7 @@ opt.completeopt = { "menuone", "noselect" }
 -- opt.conceallevel = 0
 opt.cursorline = true
 opt.expandtab = true
+opt.exrc = true
 opt.fileencoding = "utf-8"
 opt.hlsearch = false
 opt.ignorecase = false

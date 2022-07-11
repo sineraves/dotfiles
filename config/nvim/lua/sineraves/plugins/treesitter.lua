@@ -18,6 +18,7 @@ configs.setup({
     "go",
     "graphql",
     "heex",
+    "http",
     "json",
     "json5",
     "jsonc",
@@ -33,7 +34,7 @@ configs.setup({
     "tsx",
     "typescript",
     "vim",
-    "yaml"
+    "yaml",
   },
   sync_install = false,
   -- norg fails to compile on macOS Monterey as of 29/01/2022
