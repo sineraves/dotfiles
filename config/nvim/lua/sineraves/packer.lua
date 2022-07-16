@@ -49,6 +49,7 @@ return packer.startup(function(use)
   use("rcarriga/nvim-notify")
   use("folke/zen-mode.nvim")
   use("folke/twilight.nvim")
+  use({ "kyazdani42/nvim-tree.lua", config = config("nvim-tree") })
   -- Colors
   use("folke/tokyonight.nvim")
   use("ful1e5/onedark.nvim")
