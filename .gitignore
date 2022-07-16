@@ -11,3 +11,5 @@ config/fish/functions/*
 
 tmux/plugins/*
 !tmux/plugins/tpm
+
+config/lazygit/state.yml
