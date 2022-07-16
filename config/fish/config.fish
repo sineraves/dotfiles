@@ -3,6 +3,9 @@ fish_add_path /opt/homebrew/opt/openssl@3/bin
 fish_add_path ~/.local/bin
 fish_add_path ~/.cargo/bin
 
+# Keep an eye on the effects of this!
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+
 set -gx TERM screen-256color
 set -gx EDITOR nvim           # neovim
 set -gx VISUAL nvim           # ... for everything
@@ -18,7 +21,7 @@ set -gx PATH "$PNPM_HOME" $PATH
 if type -q bat
   set -gx PAGER bat
   set -gx BAT_STYLE 'numbers,changes'
-  set -gx BAT_THEME 'OneHalfDark'
+  set -gx BAT_THEME 'tokyonight'
 end
 
 abbr -U be bundle exec
@@ -40,6 +43,7 @@ abbr -U mux tmuxinator
 if type -q exa
   abbr -U ll exa -l -g --icons
   abbr -U lla exa -l -g --icons -a
+  abbr -U tree exa -l -g --icons --tree
 end
 
 # direnv
