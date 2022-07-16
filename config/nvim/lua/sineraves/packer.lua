@@ -112,6 +112,9 @@ return packer.startup(function(use)
     config = config("trouble"),
   })
 
+  -- System
+  use({ "akinsho/toggleterm.nvim", config = config("toggleterm") })
+
   -- Git
   use({ "lewis6991/gitsigns.nvim", config = config("gitsigns") })
   use("TimUntersberger/neogit")

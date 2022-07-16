@@ -29,3 +29,11 @@ autocmd("FileType", {
     vim.api.nvim_win_set_config(0, { border = vim.g.floating_window_border_dark })
   end,
 })
+
+autocmd("TermOpen", {
+  group = "SINERAVES_CONFIG",
+  pattern = "term://*",
+  callback = function()
+    set_terminal_keymaps()
+  end,
+})
