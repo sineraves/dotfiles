@@ -52,7 +52,7 @@ return packer.startup(function(use)
   use({ "kyazdani42/nvim-tree.lua", config = config("nvim-tree") })
   -- Colors
   use("folke/tokyonight.nvim")
-  use("ful1e5/onedark.nvim")
+  use("navarasu/onedark.nvim")
   use("gruvbox-community/gruvbox")
 
   -- Text manipulation
@@ -76,7 +76,6 @@ return packer.startup(function(use)
   use("hrsh7th/cmp-nvim-lua")
   use("hrsh7th/cmp-path")
   use("saadparwaiz1/cmp_luasnip")
-  use("github/copilot.vim")
 
   -- Snippets
   use("L3MON4D3/LuaSnip")

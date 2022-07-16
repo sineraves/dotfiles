@@ -148,12 +148,13 @@ local mappings = {
 
   T = {
     name = "Terminal",
-    i = { "<cmd>lua _RUBY_TOGGLE()<cr>", "IRB (Ruby)" },
-    r = { "<cmd>lua _RAILS_TOGGLE()<cr>", "Rails" },
     e = { "<cmd>lua _ELIXIR_TOGGLE()<cr>", "IEx (Elixir)" },
+    g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+    w = { "<cmd>lua _REDWOOD_TOGGLE()<cr>", "Redwood console" },
+    i = { "<cmd>lua _RUBY_TOGGLE()<cr>", "IRB (Ruby)" },
     n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-    b = { "<cmd>lua _BTM_TOGGLE()<cr>", "BTM" },
     p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
+    r = { "<cmd>lua _RAILS_TOGGLE()<cr>", "Rails console" },
     f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
     h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
