@@ -1,5 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
+local tnoremap = require("sineraves.remap").tnoremap
 
 augroup("SINERAVES_CONFIG", { clear = true })
 
@@ -34,6 +35,6 @@ autocmd("TermOpen", {
   group = "SINERAVES_CONFIG",
   pattern = "term://*",
   callback = function()
-    set_terminal_keymaps()
+    tnoremap("jk", [[<C-\><C-n>]], { buffer = true })
   end,
 })
