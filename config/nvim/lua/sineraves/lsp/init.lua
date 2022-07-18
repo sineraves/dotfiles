@@ -33,15 +33,12 @@ cmp_nvim_lsp.update_capabilities(capabilities)
 
 local on_attach = function(client)
   lsp_format.on_attach(client)
+
+  -- Additional keymaps in sineraves.plugins.which-key
   nnoremap("gd", ":lua vim.lsp.buf.definition()<CR>")
   nnoremap("K", ":lua vim.lsp.buf.hover()<CR>")
-  nnoremap("<leader>vws", ":lua vim.lsp.buf.workspace_symbol()<CR>")
-  nnoremap("<leader>vd", ":lua vim.diagnostic.open_float()<CR>")
-  nnoremap("[d", ":lua vim.lsp.diagnostic.goto_next()<CR>")
-  nnoremap("]d", ":lua vim.lsp.diagnostic.goto_prev()<CR>")
-  nnoremap("<leader>vca", ":lua vim.lsp.buf.code_action()<CR>")
-  nnoremap("<leader>vrr", ":lua vim.lsp.buf.references()<CR>")
-  nnoremap("<leader>vrn", ":lua vim.lsp.buf.rename()<CR>")
+  nnoremap("]d", [[:lua vim.diagnostic.goto_next({ float = false })<CR>]])
+  nnoremap("[d", [[:lua vim.diagnostic.goto_prev({ float = false })<CR>]])
   inoremap("<C-h>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 end
 

@@ -50,10 +50,19 @@ return packer.startup(function(use)
   use("folke/zen-mode.nvim")
   use("folke/twilight.nvim")
   use({ "kyazdani42/nvim-tree.lua", config = config("nvim-tree") })
+  use({
+    "kosayoda/nvim-lightbulb",
+    requires = "antoinemadec/FixCursorHold.nvim",
+    config = config("nvim-lightbulb"),
+  })
   -- Colors
   use("folke/tokyonight.nvim")
   use("navarasu/onedark.nvim")
   use("gruvbox-community/gruvbox")
+  use({
+    "catppuccin/nvim",
+    as = "catppuccin",
+  })
 
   -- Text manipulation
   use("AndrewRadev/splitjoin.vim")
@@ -75,7 +84,9 @@ return packer.startup(function(use)
   use("hrsh7th/cmp-nvim-lsp")
   use("hrsh7th/cmp-nvim-lua")
   use("hrsh7th/cmp-path")
+  use("hrsh7th/cmp-nvim-lsp-document-symbol")
   use("saadparwaiz1/cmp_luasnip")
+  use({ "tzachar/cmp-tabnine", run = "./install.sh", config = config("cmp-tabnine") })
 
   -- Snippets
   use("L3MON4D3/LuaSnip")

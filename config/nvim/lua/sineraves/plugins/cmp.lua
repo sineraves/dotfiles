@@ -4,13 +4,18 @@ if not cmp_status_ok then
   return
 end
 
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
+local luasnip_status_ok, luasnip = pcall(require, "luasnip")
+if not luasnip_status_ok then
   vim.notify("luasnip not installed")
   return
 end
-
 require("luasnip/loaders/from_vscode").lazy_load()
+
+local lspkind_status_ok, lspkind = pcall(require, "lspkind")
+if not lspkind_status_ok then
+  vim.notify("lspkind not installed")
+  return
+end
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -19,12 +24,12 @@ end
 
 local source_mapping = {
   buffer = "[Buffer]",
+  cmdline = "[CL]",
+  cmp_tabnine = "[TN]",
   nvim_lsp = "[LSP]",
   nvim_lua = "[Lua]",
-  cmp_tabnine = "[TN]",
   path = "[Path]",
 }
-local lspkind = require("lspkind")
 
 cmp.setup({
   snippet = {
@@ -62,25 +67,54 @@ cmp.setup({
   }),
 
   formatting = {
-    format = function(entry, vim_item)
-      vim_item.kind = lspkind.presets.default[vim_item.kind]
-      local menu = source_mapping[entry.source.name]
-      if entry.source.name == "cmp_tabnine" then
-        if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
-          menu = entry.completion_item.data.detail .. " " .. menu
+    format = lspkind.cmp_format({
+      mode = "symbol_text",
+      maxwidth = 50,
+
+      -- The function below will be called before any actual modifications from lspkind
+      -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+      before = function(entry, vim_item)
+        local menu = source_mapping[entry.source.name]
+
+        vim_item.kind = lspkind.presets.default[vim_item.kind]
+
+        if entry.source.name == "cmp_tabnine" then
+          if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+            menu = menu .. " " .. entry.completion_item.data.detail
+          end
+          vim_item.kind = ""
         end
-        vim_item.kind = ""
-      end
-      vim_item.menu = menu
-      return vim_item
-    end,
+
+        vim_item.menu = menu
+
+        return vim_item
+      end,
+    }),
   },
 
   sources = {
-    { name = "cmp_tabnine" },
+    -- { name = "cmp_tabnine" },
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
   },
+})
+
+cmp.setup.cmdline("/", {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = "nvim_lsp_document_symbol" },
+  }, {
+    { name = "buffer", keyword_length = 5, max_item_count = 5 },
+  }),
+})
+
+cmp.setup.cmdline(":", {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = "path", keyword_length = 2 },
+  }, {
+    { name = "cmdline", keyword_length = 2 },
+  }),
 })

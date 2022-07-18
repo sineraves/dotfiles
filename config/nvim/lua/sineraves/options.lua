@@ -56,9 +56,10 @@ opt.wrap = false
 opt.writebackup = false
 
 vim.diagnostic.config({
+  -- signs = { severity = "INFO" },
+  signs = true,
   virtual_text = {
-    spacing = 3,
-    prefix = " ",
+    prefix = "  ",
     severity_sort = true,
     source = "if_many",
   },

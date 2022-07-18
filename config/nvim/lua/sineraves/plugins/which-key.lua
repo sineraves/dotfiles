@@ -34,7 +34,7 @@ local setup = {
     border = "none", -- none, single, double, shadow, rounded
     position = "bottom", -- bottom, top
     margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
-    padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+    padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
     winblend = 0,
   },
   layout = {
@@ -70,16 +70,12 @@ local mappings = {
     "Buffers",
   },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  ["w"] = { "<cmd>w!<CR>", "Save" },
-  ["q"] = { "<cmd>q!<CR>", "Quit" },
-  ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["f"] = {
     "<cmd>lua require('telescope.builtin').find_files()<cr>",
     "Find files",
   },
   ["F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
-  ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
 
   p = {
     name = "Packer",
@@ -115,14 +111,16 @@ local mappings = {
 
   l = {
     name = "LSP",
+    -- Additional keymaps in sineraves.lsp
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+    d = { "<cmd>lua vim.diagnostic.open_float()<CR>" },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-    j = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next Diagnostic" },
-    k = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-    q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
+    q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
+    r = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
+    R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
     S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
   },

@@ -10,27 +10,42 @@ local sorters = require("telescope.sorters")
 
 telescope.setup({
   defaults = {
+    borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     color_devicons = true,
     dynamic_preview_title = true,
     file_sorter = sorters.get_fzy_sorter,
-    prompt_prefix = " >",
     layout_strategy = "horizontal",
     path_display = { "smart" },
+    prompt_prefix = "> ",
 
     file_previewer = previewers.vim_buffer_cat.new,
     grep_previewer = previewers.vim_buffer_vimgrep.new,
     qflist_previewer = previewers.vim_buffer_qflist.new,
+    -- buffer_previewer_maker = previewers.buffer_previewer_maker,
 
     mappings = {
       i = {
-        ["<C-x>"] = false,
+        ["<esc>"] = actions.close,
         ["<C-q>"] = actions.send_to_qflist,
+        ["<C-j>"] = actions.preview_scrolling_down,
+        ["<C-k>"] = actions.preview_scrolling_up,
+        ["<C-x>"] = false,
+        ["<C-u>"] = false,
       },
     },
   },
 
   pickers = {
-    buffers = { theme = "dropdown", previewer = false },
+    buffers = {
+      borderchars = {
+        { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+        prompt = { "─", "│", " ", "│", "┌", "┐", "│", "│" },
+        results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
+        preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+      },
+      previewer = false,
+      theme = "dropdown",
+    },
   },
 })
 
