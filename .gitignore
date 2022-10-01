@@ -1,15 +1,6 @@
 .DS_Store
-zsh/cache/
+
+config/kitty/current-theme.conf
+config/kitty/kitty.conf.bak
 config/nvim/plugin/packer_compiled.lua
-
-config/fish/fish_variables
-
-# These directories are mainly managed by fisher
-config/fish/completions/*
-config/fish/conf.d/*
-config/fish/functions/*
-
-tmux/plugins/*
-!tmux/plugins/tpm
-
 config/lazygit/state.yml

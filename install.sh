@@ -9,13 +9,11 @@ brew install bat      # `cat` clone with syntax highlighting, git
 brew install bottom   # Process/system monitor (`btm`)
 brew install exa      # Better `ls`
 brew install fd       # User-friendly `find`
-brew install fish     # A shell for the 90s
 brew install gh       # GitHub niceties
 brew install neovim   # Text editor
 brew install ripgrep  # Search
 brew install sd       # Friendlier `sed`
 brew install stylua   # Lint and format lua neovim config
-brew install tmux     # Let's go the multiplex
 
 echo "Adding asdf plugins"
 asdf plugin-add nodejs
