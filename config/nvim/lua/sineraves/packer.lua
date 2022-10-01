@@ -31,7 +31,7 @@ end
 packer.init({
   display = {
     open_fn = function()
-      return require("packer.util").float({ border = "rounded" })
+      return require("packer.util").float({ border = "single" })
     end,
   },
 })
@@ -46,9 +46,10 @@ return packer.startup(function(use)
   use({ "nvim-lualine/lualine.nvim", config = config("lualine") })
   use({ "folke/which-key.nvim", config = config("which-key") })
   use({ "simrat39/symbols-outline.nvim", config = config("symbols-outline") })
-  use("rcarriga/nvim-notify")
+  use({ "rcarriga/nvim-notify", config = config("nvim-notify") })
   use("folke/zen-mode.nvim")
   use("folke/twilight.nvim")
+  use({ "lukas-reineke/indent-blankline.nvim", config = config("indent-blankline") })
   use({ "kyazdani42/nvim-tree.lua", config = config("nvim-tree") })
   use({
     "kosayoda/nvim-lightbulb",
@@ -57,18 +58,11 @@ return packer.startup(function(use)
   })
   -- Colors
   use("folke/tokyonight.nvim")
-  use("navarasu/onedark.nvim")
-  use("gruvbox-community/gruvbox")
-  use({
-    "catppuccin/nvim",
-    as = "catppuccin",
-  })
 
   -- Text manipulation
   use("AndrewRadev/splitjoin.vim")
   use("editorconfig/editorconfig-vim")
-  -- use("rstacruz/vim-closer")
-  use("tpope/vim-endwise")
+  use({ "windwp/nvim-autopairs", config = config("nvim-autopairs") })
   use({ "machakann/vim-sandwich", config = config("vim-sandwich") })
   use({ "numToStr/Comment.nvim", config = config("comment") })
 
@@ -76,6 +70,11 @@ return packer.startup(function(use)
 
   -- Tests
   use({ "janko/vim-test", config = config("vim-test") })
+  use({
+    "nvim-neotest/neotest",
+    requires = { "nvim-neotest/neotest-go", "haydenmeade/neotest-jest", "olimorris/neotest-rspec" },
+    config = config("neotest"),
+  })
 
   -- Completion
   use({ "hrsh7th/nvim-cmp", config = config("cmp") })
@@ -86,7 +85,6 @@ return packer.startup(function(use)
   use("hrsh7th/cmp-path")
   use("hrsh7th/cmp-nvim-lsp-document-symbol")
   use("saadparwaiz1/cmp_luasnip")
-  use({ "tzachar/cmp-tabnine", run = "./install.sh", config = config("cmp-tabnine") })
 
   -- Snippets
   use("L3MON4D3/LuaSnip")
@@ -98,6 +96,7 @@ return packer.startup(function(use)
   use("neovim/nvim-lspconfig")
   use("onsails/lspkind.nvim")
   use("williamboman/nvim-lsp-installer")
+  use({ "simrat39/rust-tools.nvim", config = config("rust-tools") })
 
   -- Telescope
   use({ "nvim-telescope/telescope.nvim", config = config("telescope") })
@@ -114,6 +113,7 @@ return packer.startup(function(use)
   use("nvim-treesitter/nvim-treesitter-context")
   use("nvim-treesitter/nvim-treesitter-textobjects")
   use("JoosepAlviste/nvim-ts-context-commentstring")
+  use("RRethy/nvim-treesitter-endwise")
   use({ "danymat/neogen", config = config("neogen") })
 
   -- Debug

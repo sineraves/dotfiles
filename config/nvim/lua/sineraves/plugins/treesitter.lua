@@ -40,6 +40,7 @@ configs.setup({
   -- norg fails to compile on macOS Monterey as of 29/01/2022
   ignore_install = { "norg" },
   autopairs = { enable = true },
+  endwise = { enable = true },
   highlight = {
     enable = true,
     disable = { "" },

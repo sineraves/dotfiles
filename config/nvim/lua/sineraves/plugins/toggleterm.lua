@@ -4,26 +4,27 @@ if not status_ok then
 end
 
 toggleterm.setup({
-  size = 20,
-  open_mapping = [[<c-\>]],
-  hide_numbers = true,
-  -- shade_filetypes = {},
-  shade_terminals = true,
-  shading_factor = 1,
-  start_in_insert = true,
-  insert_mappings = true,
-  persist_size = true,
-  direction = "float",
   close_on_exit = true,
-  shell = vim.o.shell,
+  direction = "float",
   float_opts = {
-    border = "rounded",
-    winblend = 10,
-    highlights = {
-      border = "Normal",
-      background = "Normal",
+    border = "single",
+  },
+  hide_numbers = true,
+  highlights = {
+    Normal = {
+      link = "NormalFloat",
+    },
+    NormalFloat = {
+      link = "NormalFloat",
     },
   },
+  insert_mappings = true,
+  open_mapping = [[<c-\>]],
+  persist_size = true,
+  shade_terminals = false,
+  shell = vim.o.shell,
+  size = 20,
+  start_in_insert = true,
 })
 
 local Terminal = require("toggleterm.terminal").Terminal

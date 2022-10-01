@@ -3,15 +3,15 @@ local opt = vim.opt -- vim options
 
 g.mapleader = " "
 g.localmapleader = " "
-g.floating_window_border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+g.floating_window_border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
 g.floating_window_border_dark = {
-  { "╭", "FloatBorderDark" },
+  { "┌", "FloatBorderDark" },
   { "─", "FloatBorderDark" },
-  { "╮", "FloatBorderDark" },
+  { "┐", "FloatBorderDark" },
   { "│", "FloatBorderDark" },
-  { "╯", "FloatBorderDark" },
+  { "┘", "FloatBorderDark" },
   { "─", "FloatBorderDark" },
-  { "╰", "FloatBorderDark" },
+  { "└", "FloatBorderDark" },
   { "│", "FloatBorderDark" },
 }
 g.loaded_perl_provider = 0
@@ -20,7 +20,7 @@ g.python3_host_prog = "~/.asdf/shims/python3"
 opt.backup = false
 opt.cmdheight = 2
 opt.colorcolumn = "+1"
-opt.completeopt = { "menuone", "noselect" }
+opt.completeopt = { "menu", "menuone", "noselect" }
 -- opt.conceallevel = 0
 opt.cursorline = true
 opt.expandtab = true
@@ -55,11 +55,12 @@ opt.whichwrap:append("<,>,[,],h,l")
 opt.wrap = false
 opt.writebackup = false
 
+local min_severity = { min = vim.diagnostic.severity.WARN }
 vim.diagnostic.config({
-  -- signs = { severity = "INFO" },
-  signs = true,
+  signs = { severity = min_severity },
   virtual_text = {
     prefix = "  ",
+    severity = min_severity,
     severity_sort = true,
     source = "if_many",
   },

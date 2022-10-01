@@ -49,8 +49,9 @@ telescope.setup({
   },
 })
 
-require("telescope").load_extension("file_browser")
-require("telescope").load_extension("ui-select")
+telescope.load_extension("file_browser")
+telescope.load_extension("ui-select")
+telescope.load_extension("notify")
 
 local M = {}
 

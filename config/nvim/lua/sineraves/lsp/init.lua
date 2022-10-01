@@ -45,9 +45,12 @@ end
 lspconfig.gopls.setup({
   capabilities = capabilities,
   cmd = { "gopls", "serve" },
+  filetypes = { "go", "gomod" },
+  root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
   on_attach = on_attach,
   settings = {
     gopls = {
+      experimentalPostfixCompletions = true,
       analyses = {
         unusedparams = true,
       },

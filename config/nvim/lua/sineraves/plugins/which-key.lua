@@ -76,6 +76,7 @@ local mappings = {
     "Find files",
   },
   ["F"] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
+  ["z"] = { "<cmd>ZenMode<cr>", "Toggle Zen mode" },
 
   p = {
     name = "Packer",
@@ -113,16 +114,17 @@ local mappings = {
     name = "LSP",
     -- Additional keymaps in sineraves.lsp
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-    d = { "<cmd>lua vim.diagnostic.open_float()<CR>" },
+    A = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+    l = { "<cmd>lua vim.diagnostic.open_float({scope = 'cursor'})<CR>", "Show diagnostics" },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
-    i = { "<cmd>LspInfo<cr>", "Info" },
-    I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-    l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
     r = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
     R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
     S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
+    t = { "<cmd>Trouble<cr>", "Toggle Trouble" },
+    i = { "<cmd>LspInfo<cr>", "Info" },
+    I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
   },
   s = {
     name = "Search",

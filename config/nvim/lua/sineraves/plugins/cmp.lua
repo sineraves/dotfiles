@@ -25,7 +25,6 @@ end
 local source_mapping = {
   buffer = "[Buffer]",
   cmdline = "[CL]",
-  cmp_tabnine = "[TN]",
   nvim_lsp = "[LSP]",
   nvim_lua = "[Lua]",
   path = "[Path]",
@@ -77,14 +76,6 @@ cmp.setup({
         local menu = source_mapping[entry.source.name]
 
         vim_item.kind = lspkind.presets.default[vim_item.kind]
-
-        if entry.source.name == "cmp_tabnine" then
-          if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
-            menu = menu .. " " .. entry.completion_item.data.detail
-          end
-          vim_item.kind = ""
-        end
-
         vim_item.menu = menu
 
         return vim_item
@@ -93,7 +84,6 @@ cmp.setup({
   },
 
   sources = {
-    -- { name = "cmp_tabnine" },
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "buffer" },
@@ -118,3 +108,11 @@ cmp.setup.cmdline(":", {
     { name = "cmdline", keyword_length = 2 },
   }),
 })
+
+local cmp_autopairs_status_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+if not cmp_autopairs_status_ok then
+  vim.notify("cmp_autopairs not installed")
+  return
+end
+
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
