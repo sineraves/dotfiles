@@ -138,6 +138,9 @@ export GPG_TTY=$(tty)
 export XDG_CONFIG_HOME="$HOME/.config"
 export BAT_STYLE='numbers,changes'
 
+export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
+
 if [[ -x $(which nvim) ]]
   export EDITOR=nvim
   export VISUAL=nvim
@@ -151,6 +154,9 @@ fi
 
 alias be='bundle exec'
 alias br='bundle exec rspec'
+
+alias bo='brew update && brew outdated'
+alias bu='brew upgrade'
 
 alias dc='docker compose'
 alias dce='docker compose exec'
