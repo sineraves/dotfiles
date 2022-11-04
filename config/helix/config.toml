@@ -1,4 +1,0 @@
-theme = "dracula"
-
-[keys.insert]
-j = { k = "normal_mode" }
