@@ -27,9 +27,8 @@ lsp_installer.setup({
 lsp_format.setup({})
 
 -- Default `capabilities` and `on_attach` to pass to lsp setup functions
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = cmp_nvim_lsp.default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-cmp_nvim_lsp.update_capabilities(capabilities)
 
 local on_attach = function(client)
   lsp_format.on_attach(client)
