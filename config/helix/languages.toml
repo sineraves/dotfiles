@@ -1,0 +1,10 @@
+[[language]]
+name = "rust"
+
+[language.config]
+checkOnSave = { command = "clippy" }
+
+[[language]]
+name = "ruby"
+formatter = { command = "bundle", args = ["exec", "rubocop", "--stdin", "foo.rb", "--fix", "--stderr", "--fail-level", "fatal"] }
+auto-format = false

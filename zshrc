@@ -133,6 +133,8 @@ unset key
 # Sineraves
 # ------------------------------
 
+path+=("$HOME/.local/bin", "$HOME/go/bin")
+export PATH
 export TERM=screen-256color
 export GPG_TTY=$(tty)
 export XDG_CONFIG_HOME="$HOME/.config"
