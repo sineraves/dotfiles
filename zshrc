@@ -186,11 +186,11 @@ alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 function set_theme() {
   if [[ "$TERM_THEME" = "light" ]]
   then
-    local kitty_theme='Tokyo Night Day'
+    local kitty_theme='Catppuccin-Latte'
     local bat_theme='GitHub'
   else
-    local kitty_theme='Tokyo Night Storm'
-    local bat_theme='tokyonight'
+    local kitty_theme='Catppuccin-Macchiato'
+    local bat_theme='OneHalfDark'
   fi
 
   export BAT_THEME=$bat_theme

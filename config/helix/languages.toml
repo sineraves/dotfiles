@@ -1,10 +1,38 @@
 [[language]]
+name = "astro"
+roots = ["package.json", "astro.config.mjs"]
+language-server = { command = "astro-ls", args = ["--stdio"] }
+
+[[language]]
+name = "css"
+formatter = { command = 'prettier', args = ["--parser", "css"] }
+auto-format = true
+
+[[language]]
+name = "html"
+formatter = { command = 'prettier', args = ["--parser", "html"] }
+
+[[language]]
+name = "javascript"
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "json"
+formatter = { command = 'prettier', args = ["--parser", "json"] }
+
+[[language]]
+name = "ruby"
+formatter = { command = "bundle", args = ["exec", "rubocop", "--stdin", "foo.rb", "--fix", "--stderr", "--fail-level", "fatal"] }
+auto-format = true
+
+[[language]]
 name = "rust"
 
 [language.config]
 checkOnSave = { command = "clippy" }
 
 [[language]]
-name = "ruby"
-formatter = { command = "bundle", args = ["exec", "rubocop", "--stdin", "foo.rb", "--fix", "--stderr", "--fail-level", "fatal"] }
-auto-format = false
+name = "typescript"
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
