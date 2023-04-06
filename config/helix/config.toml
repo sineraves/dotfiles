@@ -1,8 +1,10 @@
 theme = "catppuccin_macchiato"
 
 [editor]
+bufferline = "multiple"
 color-modes = true
 line-number = "relative"
+mouse = false
 rulers = [80]
 
 [editor.cursor-shape]
