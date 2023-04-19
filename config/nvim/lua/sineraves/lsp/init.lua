@@ -1,7 +1,9 @@
+require("mason").setup()
+require("mason-lspconfig").setup()
+
+local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local lsp_format = require("lsp-format")
-local lsp_installer = require("nvim-lsp-installer")
-local lspconfig = require("lspconfig")
 local null_ls = require("null-ls")
 
 local remap = require("sineraves.remap")
@@ -9,18 +11,6 @@ local inoremap = remap.inoremap
 local nnoremap = remap.nnoremap
 
 local use_bundler = false
-
--- Note: `solargraph` needs to be installed manually for the right ruby/bundle
-lsp_installer.setup({
-  ensure_installed = {
-    "elixirls",
-    "gopls",
-    "prismals",
-    "rust_analyzer",
-    "sumneko_lua",
-    "tsserver",
-  },
-})
 
 -- lsp-format takes care of "format on save" hooks
 -- actual formatting is provided by relevant lsps
@@ -40,6 +30,12 @@ local on_attach = function(client)
   nnoremap("[d", [[:lua vim.diagnostic.goto_prev({ float = false })<CR>]])
   inoremap("<C-h>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 end
+
+lspconfig.elixirls.setup({
+  capabilities = capabilities,
+  cmd = { "elixir-ls" },
+  on_attach = on_attach,
+})
 
 lspconfig.gopls.setup({
   capabilities = capabilities,
@@ -89,23 +85,94 @@ lspconfig.solargraph.setup({
   },
 })
 
-lspconfig.sumneko_lua.setup({
+lspconfig.tailwindcss.setup({
+  init_options = {
+    userLanguages = {
+      elixir = "phoenix-heex",
+      eruby = "erb",
+      heex = "phoenix-heex",
+      svelte = "html",
+      surface = "phoenix-heex",
+    },
+  },
+  handlers = {
+    ["tailwindcss/getConfiguration"] = function(_, _, params, _, bufnr, _)
+      vim.lsp.buf_notify(bufnr, "tailwindcss/getConfigurationResponse", { _id = params._id })
+    end,
+  },
+  settings = {
+    includeLanguages = {
+      typescript = "javascript",
+      typescriptreact = "html",
+      ["html-eex"] = "html",
+      ["phoenix-heex"] = "html",
+      heex = "html",
+      eelixir = "html",
+      elixir = "html",
+      elm = "html",
+      erb = "html",
+      svelte = "html",
+      surface = "html",
+    },
+    tailwindCSS = {
+      lint = {
+        cssConflict = "warning",
+        invalidApply = "error",
+        invalidConfigPath = "error",
+        invalidScreen = "error",
+        invalidTailwindDirective = "error",
+        invalidVariant = "error",
+        recommendedVariantOrder = "warning",
+      },
+      experimental = {
+        classRegex = {
+          [[class= "([^"]*)]],
+          [[class: "([^"]*)]],
+          '~H""".*class="([^"]*)".*"""',
+        },
+      },
+      validate = true,
+    },
+  },
+})
+
+lspconfig.lua_ls.setup({
   capabilities = capabilities,
   -- disable sumneko_lua formatting in favour of null-ls/stylua
   on_attach = function(client)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
     on_attach(client)
   end,
-  settings = require("sineraves.lsp.settings.sumneko_lua"),
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = "LuaJIT",
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = { "vim" },
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
 })
 
 lspconfig.tsserver.setup({
   capabilities = capabilities,
   -- disable tsserver formatting in favour of null-ls/prettier
   on_attach = function(client)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
     on_attach(client)
   end,
 })
@@ -132,22 +199,27 @@ end
 null_ls.setup({
   on_attach = on_attach,
   sources = {
-    nd.credo,
+    -- Expects credo to be installed globally with:
+    -- `mix escript.install hex credo`
+    nd.credo.with({
+      command = "credo",
+      args = { "suggest", "--format", "json", "--read-from-stdin", "$FILENAME" },
+    }),
     nd.eslint.with(js_conf({
       ".eslintrc",
       ".eslintrc.cjs",
       ".eslintrc.js",
       ".eslintrc.json",
     })),
-    nf.mix,
-    nf.prettier.with(js_conf({
-      ".prettierrc",
-      ".prettierrc.cjs",
-      ".prettierrc.js",
-      ".prettierrc.json",
-      "prettier.config.js",
-    })),
-    nf.rustfmt,
+    --[[ nf.mix, ]]
+    --[[ nf.prettier.with(js_conf({ ]]
+    --[[   ".prettierrc", ]]
+    --[[   ".prettierrc.cjs", ]]
+    --[[   ".prettierrc.js", ]]
+    --[[   ".prettierrc.json", ]]
+    --[[   "prettier.config.js", ]]
+    --[[ })), ]]
+    --[[ nf.rustfmt, ]]
     nf.stylua,
   },
 })

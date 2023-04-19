@@ -116,7 +116,7 @@ local mappings = {
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
     A = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     l = { "<cmd>lua vim.diagnostic.open_float({scope = 'cursor'})<CR>", "Show diagnostics" },
-    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+    f = { "<cmd>lua vim.lsp.buf.format({async = true})<cr>", "Format" },
     q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
     r = { "<cmd>lua vim.lsp.buf.references()<cr>", "References" },
     R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },

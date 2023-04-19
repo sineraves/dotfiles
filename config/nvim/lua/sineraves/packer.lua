@@ -58,6 +58,11 @@ return packer.startup(function(use)
   })
   -- Colors
   use("folke/tokyonight.nvim")
+  use("rebelot/kanagawa.nvim")
+  use({
+    "rose-pine/neovim",
+    as = "rose-pine",
+  })
 
   -- Text manipulation
   use("AndrewRadev/splitjoin.vim")
@@ -72,7 +77,12 @@ return packer.startup(function(use)
   use({ "janko/vim-test", config = config("vim-test") })
   use({
     "nvim-neotest/neotest",
-    requires = { "nvim-neotest/neotest-go", "haydenmeade/neotest-jest", "olimorris/neotest-rspec" },
+    requires = {
+      "nvim-neotest/neotest-go",
+      "haydenmeade/neotest-jest",
+      "olimorris/neotest-rspec",
+      "jfpedroza/neotest-elixir",
+    },
     config = config("neotest"),
   })
 
@@ -94,8 +104,9 @@ return packer.startup(function(use)
   use("jose-elias-alvarez/null-ls.nvim")
   use("lukas-reineke/lsp-format.nvim")
   use("neovim/nvim-lspconfig")
+  use({ "williamboman/mason.nvim" })
+  use({ "williamboman/mason-lspconfig.nvim" })
   use("onsails/lspkind.nvim")
-  use("williamboman/nvim-lsp-installer")
   use({ "simrat39/rust-tools.nvim", config = config("rust-tools") })
 
   -- Telescope
@@ -103,6 +114,8 @@ return packer.startup(function(use)
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
   use("nvim-telescope/telescope-file-browser.nvim")
   use("nvim-telescope/telescope-ui-select.nvim")
+
+  use({ "mhanberg/elixir.nvim", requires = { "nvim-lua/plenary.nvim" } })
 
   -- Treesitter
   use({

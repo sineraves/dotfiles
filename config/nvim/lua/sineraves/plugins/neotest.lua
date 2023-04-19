@@ -5,6 +5,7 @@ neotest.setup({
     require("neotest-go"),
     require("neotest-jest"),
     require("neotest-rspec"),
+    require("neotest-elixir"),
   },
   diagnostic = {
     enabled = false,
