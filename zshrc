@@ -133,9 +133,13 @@ unset key
 # Sineraves
 # ------------------------------
 
-path+=("$HOME/.local/bin", "$HOME/go/bin")
+export GOPATH=$(go env GOPATH)
+export GOROOT=$(go env GOROOT)
+export GOBIN=$(go env GOBIN)
+
+path+=("$GOPATH/bin" "$HOME/.local/bin" "/opt/homebrew/opt/llvm/bin")
 export PATH
-export TERM=screen-256color
+
 export GPG_TTY=$(tty)
 export XDG_CONFIG_HOME="$HOME/.config"
 export BAT_STYLE='numbers,changes'
@@ -154,6 +158,8 @@ then
   export PAGER=bat
 fi
 
+alias n='nvim'
+
 alias be='bundle exec'
 alias br='bundle exec rspec'
 
@@ -167,7 +173,7 @@ alias dcs='docker compose restart'
 
 alias ll='exa -l -g --icons'
 alias lla='exa -l -g --icons -a'
-alias tree='exa -l -g --icons --tree'
+# alias tree='exa -l -g --icons --tree'
 
 alias g='git'
 alias ga='git add'
@@ -180,16 +186,31 @@ alias gs='git status --short'
 
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 
+function config-open() {
+  nvim ~/.zshrc
+}
+
+function config-reload() {
+  source ~/.zshrc
+  echo "Reloaded ~/.zshrc"
+}
+
+function godoc() {
+  go doc $@ | bat --file-name doc.go
+}
+
 # Colours
 
 # TODO: move functions to files and load in fpath?
 function set_theme() {
-  if [[ "$TERM_THEME" = "light" ]]
+  theme=$(<~/.term_theme)
+
+  if [[ "$theme" = "light" ]]
   then
-    local kitty_theme='Catppuccin-Latte'
+    local kitty_theme='Tokyo Night Day'
     local bat_theme='GitHub'
   else
-    local kitty_theme='Catppuccin-Macchiato'
+    local kitty_theme='Tokyo Night Storm'
     local bat_theme='OneHalfDark'
   fi
 
@@ -201,11 +222,13 @@ function set_theme() {
 }
 
 function toggle_theme() {
-  if [[ "$TERM_THEME" = "light" ]]
+  theme=$(<~/.term_theme)
+
+  if [[ "$theme" = "light" ]]
   then
-    export TERM_THEME=dark
+    echo 'dark' >| ~/.term_theme
   else
-    export TERM_THEME=light
+    echo 'light' >| ~/.term_theme
   fi
 
   set_theme

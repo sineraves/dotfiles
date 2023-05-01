@@ -78,8 +78,8 @@ lspconfig.solargraph.setup({
   on_attach = on_attach,
   settings = {
     solargraph = {
-      diagnostics = true,
-      formatting = true,
+      diagnostics = false,
+      formatting = false,
       use_bundler = use_bundler,
     },
   },
@@ -182,6 +182,10 @@ lspconfig.tsserver.setup({
 -- external tools must be executable
 local nd = null_ls.builtins.diagnostics
 local nf = null_ls.builtins.formatting
+local conditional = function(fn)
+    local utils = require("null-ls.utils").make_conditional_utils()
+    return fn(utils)
+end
 
 local has_root = function(root_files)
   return function(utils)
@@ -211,6 +215,22 @@ null_ls.setup({
       ".eslintrc.js",
       ".eslintrc.json",
     })),
+    conditional(function(utils)
+      return utils.root_has_file("Gemfile")
+          and nd.rubocop.with({
+            command = "bundle",
+            args = vim.list_extend({ "exec", "rubocop" }, nd.rubocop._opts.args),
+          })
+        or nd.rubocop
+    end),
+    conditional(function(utils)
+      return utils.root_has_file("Gemfile")
+          and nf.rubocop.with({
+            command = "bundle",
+            args = vim.list_extend({ "exec", "rubocop" }, nf.rubocop._opts.args),
+          })
+        or nf.rubocop
+    end),
     --[[ nf.mix, ]]
     --[[ nf.prettier.with(js_conf({ ]]
     --[[   ".prettierrc", ]]

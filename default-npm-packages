@@ -1,0 +1,9 @@
+@astrojs/language-server
+@tailwindcss/language-server
+neovim
+svelte-language-server
+typescript
+typescript-language-server
+vscode-langservers-extracted
+yaml-language-server
+yarn

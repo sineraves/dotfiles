@@ -58,11 +58,8 @@ return packer.startup(function(use)
   })
   -- Colors
   use("folke/tokyonight.nvim")
-  use("rebelot/kanagawa.nvim")
-  use({
-    "rose-pine/neovim",
-    as = "rose-pine",
-  })
+  use("EdenEast/nightfox.nvim")
+  use("arcticicestudio/nord-vim")
 
   -- Text manipulation
   use("AndrewRadev/splitjoin.vim")
