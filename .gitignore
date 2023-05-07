@@ -1,4 +1,5 @@
 .DS_Store
+/tags
 
 kitty/current-theme.conf
 kitty/kitty.conf.bak
