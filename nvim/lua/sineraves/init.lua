@@ -1,7 +1,0 @@
-require("sineraves.options")
-require("sineraves.globals")
-require("sineraves.packer")
-require("sineraves.lsp")
-require("sineraves.keymaps")
-require("sineraves.colorscheme")
-require("sineraves.autocommands")

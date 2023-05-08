@@ -3,25 +3,10 @@ if not status_ok then
   return
 end
 
-comment.setup({
-  pre_hook = function(ctx)
-    local U = require("Comment.utils")
+local opts = {}
+local comment_string_ok, comment_string = pcall(require, "ts_context_commentstring.integrations.comment_nvim")
+if comment_string_ok then
+  opts = { pre_hook = comment_string.create_pre_hook() }
+end
 
-    local context_status_ok, _ = pcall(require, "ts_context_commentstring")
-    if not context_status_ok then
-      return
-    end
-
-    local location = nil
-    if ctx.ctype == U.ctype.block then
-      location = require("ts_context_commentstring.utils").get_cursor_location()
-    elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-      location = require("ts_context_commentstring.utils").get_visual_start_location()
-    end
-
-    return require("ts_context_commentstring.internal").calculate_commentstring({
-      key = ctx.ctype == U.ctype.line and "__default" or "__multiline",
-      location = location,
-    })
-  end,
-})
+comment.setup(opts)
