@@ -159,6 +159,9 @@ then
 fi
 
 alias n='nvim'
+alias mux='tmuxinator'
+
+alias r='ranger'
 
 alias be='bundle exec'
 alias br='bundle exec rspec'
