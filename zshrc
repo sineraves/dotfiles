@@ -210,10 +210,10 @@ function set_theme() {
 
   if [[ "$theme" = "light" ]]
   then
-    local kitty_theme='rose-pine-dawn'
+    local kitty_theme='Catppuccin-Latte'
     local bat_theme='GitHub'
   else
-    local kitty_theme='rose-pine-moon'
+    local kitty_theme='Catppuccin-Macchiato'
     local bat_theme='OneHalfDark'
   fi
 

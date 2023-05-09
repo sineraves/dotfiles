@@ -4,5 +4,5 @@ if not ok then
 end
 
 autopairs.setup({
-  check_ts = true
+  check_ts = true,
 })

@@ -1,11 +1,21 @@
-local ok, rp = pcall(require, "rose-pine")
+local ok, catppuccin = pcall(require, "catppuccin")
 if not ok then
-  print("colorscheme not found")
   return
 end
 
-rp.setup({
-  dark_variant = "moon",
+catppuccin.setup({
+  flavour = "macchiato", -- latte, frappe, macchiato, mocha
+  background = {
+    -- :h background
+    light = "latte",
+    dark = "macchiato",
+  },
+  integrations = {
+    native_lsp = {
+      enabled = false,
+    },
+    notify = true,
+  },
 })
 
-vim.cmd("colorscheme rose-pine")
+vim.cmd("colorscheme catppuccin")

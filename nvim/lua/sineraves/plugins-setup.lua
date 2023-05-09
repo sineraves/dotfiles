@@ -49,6 +49,7 @@ return packer.startup(function(use)
   use("folke/which-key.nvim")
 
   -- Colors
+  use({ "catppuccin/nvim", as = "catppuccin" })
   use({ "rose-pine/neovim", as = "rose-pine" })
 
   -- Text manipulation
