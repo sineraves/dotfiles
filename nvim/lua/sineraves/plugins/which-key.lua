@@ -8,7 +8,7 @@ vim.o.timeoutlen = 300
 
 which_key.setup({})
 which_key.register({
-  ["c"] = { name = "Code actions" },
+  ["c"] = { name = "Code" },
   ["f"] = { name = "Find" },
   ["g"] = { name = "Git" },
   ["h"] = { name = "History" },

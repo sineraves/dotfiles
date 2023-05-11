@@ -3,6 +3,7 @@ local opt = vim.opt -- vim options
 
 -- obvs
 opt.fileencoding = "utf-8"
+opt.mouse = ""
 
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1

@@ -28,6 +28,13 @@ telescope.setup({
   },
 
   pickers = {
+    buffers = {
+      mappings = {
+        i = {
+          ["<c-d>"] = actions.delete_buffer,
+        },
+      },
+    },
     help_tags = {
       mappings = {
         i = {
