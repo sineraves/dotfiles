@@ -239,6 +239,11 @@ function toggle_theme() {
 
 set_theme
 
+# Bindings
+
+# Have ^U clear to beginning of line, like bash does.
+bindkey \^U backward-kill-line
+
 # Starship prompt
 if [[ -x $(which starship) ]]
 then
