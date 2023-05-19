@@ -88,6 +88,10 @@ return packer.startup(function(use)
   use("lukas-reineke/lsp-format.nvim")
   use("smjonas/inc-rename.nvim")
 
+  -- Debug
+  use("mfussenegger/nvim-dap")
+  use("rcarriga/nvim-dap-ui")
+
   -- Telescope
   use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" })
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
