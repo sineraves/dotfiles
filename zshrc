@@ -205,6 +205,22 @@ function godoc() {
   go doc $@ | bat --file-name doc.go
 }
 
+function safecd {
+  if [ ! -z "$1" ]; then
+    cd $1
+  fi
+}
+
+function s() {
+  local args=''
+
+  if [ ! -z "$1" ]; then
+    args="-q $1"
+  fi
+
+  safecd $(projector -c $HOME/_/projects -e '.*_archived.*' list | fzf $args)
+}
+
 # Colours
 
 # TODO: move functions to files and load in fpath?
