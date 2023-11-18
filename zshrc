@@ -147,6 +147,9 @@ export BAT_STYLE='numbers,changes'
 export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
 
+# Enable history in erlang/elixir shell
+export ERL_AFLAGS="-kernel shell_history enabled"
+
 if [[ -x $(which nvim) ]]
   export EDITOR=nvim
   export VISUAL=nvim
@@ -268,3 +271,9 @@ if [[ -x $(which starship) ]]
 then
   eval "$(starship init zsh)"
 fi
+
+# Opam for OCAML
+[[ ! -r /Users/matt/.opam/opam-init/init.zsh ]] || source /Users/matt/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+# Haskell
+[ -f "/Users/matt/.ghcup/env" ] && source "/Users/matt/.ghcup/env" # ghcup-env
