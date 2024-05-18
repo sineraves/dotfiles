@@ -1,154 +1,94 @@
-# Start configuration added by Zim install {{{
-#
-# User configuration sourced by interactive shells
-#
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-# -----------------
-# Zsh configuration
-# -----------------
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
 
-#
-# History
-#
+# Zinit & plugins location
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# Remove older command from the history if a duplicate is to be added.
-setopt HIST_IGNORE_ALL_DUPS
+# Download zinit when not present
+if [ ! -d "$ZINIT_HOME" ]; then
+  mkdir -p "$(dirname $ZINIT_HOME)"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
-#
-# Input/output
-#
+# Load zinit
+source "$ZINIT_HOME/zinit.zsh"
 
-# Set editor default keymap to emacs (`-e`) or vi (`-v`)
+# Prompt
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+# Plugins
+
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
+# Snippets
+
+zinit snippet OMZP::asdf
+zinit snippet OMZP::command-not-found
+
+# Load completions
+autoload -Uz compinit && compinit
+
+zinit cdreplay -q
+
+# Key bindings
 bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey '^u' backward-kill-line
 
-# Prompt for spelling correction of commands.
-#setopt CORRECT
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space # prepend command with space to prevent saving to histfile
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
-# Customize spelling correction prompt.
-#SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -l -g --icons=auto --color=always $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -l -g --icons=auto --color=always $realpath'
 
-# Remove path separator from WORDCHARS.
-WORDCHARS=${WORDCHARS//[\/]}
-
-# -----------------
-# Zim configuration
-# -----------------
-
-# Use degit instead of git as the default tool to install and update modules.
-#zstyle ':zim:zmodule' use 'degit'
-
-# --------------------
-# Module configuration
-# --------------------
-
-#
-# git
-#
-
-# Set a custom prefix for the generated aliases. The default prefix is 'G'.
-# zstyle ':zim:git' aliases-prefix 'g'
-
-#
-# input
-#
-
-# Append `../` to your input for each `.` you type after an initial `..`
-#zstyle ':zim:input' double-dot-expand yes
-
-#
-# termtitle
-#
-
-# Set a custom terminal title format using prompt expansion escape sequences.
-# See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
-# If none is provided, the default '%n@%m: %~' is used.
-#zstyle ':zim:termtitle' format '%1~'
-
-#
-# zsh-autosuggestions
-#
-
-# Disable automatic widget re-binding on each precmd. This can be set when
-# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-
-# Customize the style that the suggestions are shown with.
-# See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-
-#
-# zsh-syntax-highlighting
-#
-
-# Set what highlighters will be used.
-# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-
-# Customize the main highlighter styles.
-# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
-#typeset -A ZSH_HIGHLIGHT_STYLES
-#ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
-
-# ------------------
-# Initialize modules
-# ------------------
-
-ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-# Download zimfw plugin manager if missing.
-if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  if (( ${+commands[curl]} )); then
-    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  else
-    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  fi
-fi
-# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  source ${ZIM_HOME}/zimfw.zsh init -q
-fi
-# Initialize modules.
-source ${ZIM_HOME}/init.zsh
-
-# ------------------------------
-# Post-init module configuration
-# ------------------------------
-
-#
-# zsh-history-substring-search
-#
-
-zmodload -F zsh/terminfo +p:terminfo
-# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
-for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
-for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
-for key ('k') bindkey -M vicmd ${key} history-substring-search-up
-for key ('j') bindkey -M vicmd ${key} history-substring-search-down
-unset key
-# }}} End configuration added by Zim install
-
-
-# ------------------------------
-# Sineraves
-# ------------------------------
+# User specific ########################################################################################################
 
 export GOPATH=$(go env GOPATH)
 export GOROOT=$(go env GOROOT)
 export GOBIN=$(go env GOBIN)
 
-path+=("$GOPATH/bin" "$HOME/.local/bin" "/opt/homebrew/opt/llvm/bin")
-export PATH
+path+=("$HOME/.bun/bin" "$GOPATH/bin" "$HOME/.local/bin" "/opt/homebrew/opt/llvm/bin")
+export path
 
 export GPG_TTY=$(tty)
 export XDG_CONFIG_HOME="$HOME/.config"
 export BAT_STYLE='numbers,changes'
+export BAT_THEME='tokyonight_moon'
 
 export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
 
 # Enable history in erlang/elixir shell
 export ERL_AFLAGS="-kernel shell_history enabled"
+# Build erlang/OTP with EEP48 documentation chunks
+export KERL_BUILD_DOCS=yes
 
 if [[ -x $(which nvim) ]]
   export EDITOR=nvim
@@ -156,15 +96,8 @@ if [[ -x $(which nvim) ]]
 then
 fi
 
-if [[ -x $(which bat) ]]
-then
-  export PAGER=bat
-fi
-
-alias n='nvim'
-alias mux='tmuxinator'
-
-alias r='ranger'
+# Aliases
+alias ls='ls --color'
 
 alias be='bundle exec'
 alias bi='bundle install'
@@ -174,14 +107,9 @@ alias brc='brew cleanup'
 alias bro='brew outdated'
 alias bru='brew upgrade'
 
-alias dc='docker compose'
-alias dce='docker compose exec'
-alias dcr='docker compose run'
-alias dcs='docker compose restart'
-
-alias ll='exa -l -g --icons'
-alias lla='exa -l -g --icons -a'
-# alias tree='exa -l -g --icons --tree'
+alias ll='eza -l -g --icons=auto'
+alias lla='eza -l -g --icons=auto -a'
+alias tree='eza -l -g --icons=auto --tree'
 
 alias g='git'
 alias ga='git add'
@@ -191,18 +119,11 @@ alias gcm='git commit'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gl="git log --pretty='%C(yellow)%h %C(cyan)%cd %Cblue%aN%C(auto)%d %s' --date=short --date-order"
+alias gr='git rebase'
+alias gra='git rebase -i --autosquash'
 alias gs='git status --short'
 
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
-
-function config-open() {
-  nvim ~/.zshrc
-}
-
-function config-reload() {
-  source ~/.zshrc
-  echo "Reloaded ~/.zshrc"
-}
 
 function godoc() {
   go doc $@ | bat --file-name doc.go
@@ -224,56 +145,18 @@ function s() {
   safecd $(projector -c $HOME/_/projects -e '.*_archived.*' list | fzf $args)
 }
 
-# Colours
-
-# TODO: move functions to files and load in fpath?
-function set_theme() {
-  theme=$(<~/.term_theme)
-
-  if [[ "$theme" = "light" ]]
-  then
-    local kitty_theme='Catppuccin-Latte'
-    local bat_theme='Catppuccin-latte'
-  else
-    local kitty_theme='Catppuccin-Macchiato'
-    local bat_theme='Catppuccin-macchiato'
-  fi
-
-  export BAT_THEME=$bat_theme
-  if [[ -x $(which kitty) ]]
-  then
-    kitty +kitten themes --reload-in=all $kitty_theme
-  fi
-}
-
-function toggle_theme() {
-  theme=$(<~/.term_theme)
-
-  if [[ "$theme" = "light" ]]
-  then
-    echo 'dark' >| ~/.term_theme
-  else
-    echo 'light' >| ~/.term_theme
-  fi
-
-  set_theme
-}
-
-set_theme
-
-# Bindings
-
-# Have ^U clear to beginning of line, like bash does.
-bindkey \^U backward-kill-line
-
-# Starship prompt
-if [[ -x $(which starship) ]]
-then
-  eval "$(starship init zsh)"
-fi
+# Shell integrations
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 # Opam for OCAML
 [[ ! -r /Users/matt/.opam/opam-init/init.zsh ]] || source /Users/matt/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
-# Haskell
-[ -f "/Users/matt/.ghcup/env" ] && source "/Users/matt/.ghcup/env" # ghcup-env
+# Indeed k8s
+[ -f "/Users/matt/.indeed-kube-profile" ] && source "/Users/matt/.indeed-kube-profile"
+
+# bun completions
+[ -s "/Users/matt/.bun/_bun" ] && source "/Users/matt/.bun/_bun"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

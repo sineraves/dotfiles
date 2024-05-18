@@ -19,3 +19,4 @@ brew "tmux"
 brew "tree"
 brew "universal-ctags", args: ["HEAD"]
 brew "wget"
+brew "zoxide"
