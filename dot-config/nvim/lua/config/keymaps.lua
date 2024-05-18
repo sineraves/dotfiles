@@ -15,8 +15,7 @@ keymap.set("n", "]<Space>", "o<Esc>k", { desc = "Insert blank line below" })
 keymap.set("v", "p", '"_dP', { desc = "Paste without yanking" })
 keymap.set("n", "x", '"_x', { desc = "Delete without yanking" })
 
--- Vim test
-keymap.set("n", "<leader>tl", "<cmd>TestLast<cr>", { desc = "Re-run last test run" })
-keymap.set("n", "<leader>tn", "<cmd>TestNearest<cr>", { desc = "Run nearest test" })
-keymap.set("n", "<leader>tf", "<cmd>TestFile<cr>", { desc = "Run all tests in file" })
-keymap.set("n", "<leader>ts", "<cmd>TestSuite<cr>", { desc = "Run entire test suite" })
+-- TreeSJ
+keymap.set("n", "gT", require("treesj").toggle)
+keymap.set("n", "gS", require("treesj").split)
+keymap.set("n", "gJ", require("treesj").join)

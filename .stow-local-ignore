@@ -1,0 +1,14 @@
+# Comments and blank lines are allowed.
+
+\.git
+\.gitignore
+\.gitmodules
+
+.+~ # emacs backup files
+\#.\*\# # emacs autosave files
+
+\.stylua.toml
+^/Brewfile
+^/Brewfile.lock.json
+^/README.md
+^/tags

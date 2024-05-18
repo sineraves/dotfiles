@@ -1,0 +1,10 @@
+{
+  "Typed and frozen": {
+    "prefix": "tf",
+    "body": [
+      "# typed: ${1:strict}",
+      "# frozen_string_literal: true",
+      "$0"
+    ]
+  }
+}

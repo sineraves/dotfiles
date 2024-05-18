@@ -1,9 +1,6 @@
 .DS_Store
 /tags
 
-kitty/current-theme.conf
-kitty/kitty.conf.bak
-nvim/plugin/packer_compiled.lua
-lazygit/state.yml
-tmux/plugins/**/*
-tmux/resurrect/**
+dot-config/lazygit/state.yml
+dot-config/tmux/plugins/**/*
+dot-config/tmux/resurrect/**

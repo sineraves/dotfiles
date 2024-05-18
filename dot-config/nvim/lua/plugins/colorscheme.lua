@@ -5,7 +5,10 @@ return {
     priority = 1000,
     opts = function()
       return {
-        flavour = "macchiato",
+        background = {
+          light = "latte",
+          dark = "macchiato",
+        },
       }
     end,
   },
